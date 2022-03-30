@@ -35,22 +35,20 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       </div>
       <div>
         {note.type === "comment" ? (
-          <AnnotationIcon className="h-4 text-gray-500" />
+          <AnnotationIcon className="inline-block h-4 text-gray-500" />
         ) : (
           <ExclamationIcon className="h-4 text-red-500" />
         )}
       </div>
       <div className="flex-grow">{note.note}</div>
-      {note.metrics.includes("reactorHotspotTemperatureC") ? (
-        <div>
-          <BookmarkIcon className="h-4 text-sensor-1" />
-        </div>
-      ) : null}
-      {note.metrics.includes("reactorOutletTemperatureC") ? (
-        <div>
-          <BookmarkIcon className="h-4 text-sensor-2" />
-        </div>
-      ) : null}
+      <div>
+        {note.metrics.includes("reactorHotspotTemperatureC") ? (
+          <BookmarkIcon className="inline-block h-4 text-sensor-1" />
+        ) : null}
+        {note.metrics.includes("reactorOutletTemperatureC") ? (
+          <BookmarkIcon className="inline-block h-4 text-sensor-2" />
+        ) : null}
+      </div>
     </div>
   );
 };

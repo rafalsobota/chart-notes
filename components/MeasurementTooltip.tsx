@@ -16,14 +16,18 @@ export const MeasurementTooltip = ({
       if (!measurement.notes) return;
       const notesReversed = measurement.notes.reverse();
       return {
-        all: notesReversed.find((n) => n.metrics.length > 1),
+        all: notesReversed.find(
+          (n) => n.type === "alert" && n.metrics.length > 1
+        ),
         outlet: notesReversed.find(
           (n) =>
+            n.type === "alert" &&
             n.metrics.length == 1 &&
             n.metrics[0] === "reactorOutletTemperatureC"
         ),
         hotspot: notesReversed.find(
           (n) =>
+            n.type === "alert" &&
             n.metrics.length == 1 &&
             n.metrics[0] === "reactorHotspotTemperatureC"
         ),
