@@ -3,8 +3,8 @@ export const noteTypes: NoteType[] = ["alert", "comment"];
 
 export type Timestamp = number;
 
-export type MetricName = 'reactorOutletTemperatureC' | 'reactorHotspotTemperatureC';
-export const metricNames: MetricName[] = ['reactorOutletTemperatureC', 'reactorHotspotTemperatureC'];
+export type MetricName = 'reactorHotspotTemperatureC' | 'reactorOutletTemperatureC';
+export const metricNames: MetricName[] = ['reactorHotspotTemperatureC', 'reactorOutletTemperatureC'];
 
 export type Measurement = {
   date: Timestamp,
