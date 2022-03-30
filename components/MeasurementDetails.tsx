@@ -27,18 +27,18 @@ export const MeasurementDetails = ({
       <div className="flex flex-row space-x-5 justify-evenly">
         <div className="flex-1 text-right">
           <div className="flex flex-col">
-            <div className="text-4xl text-green-500">
+            <div className="text-4xl text-sensor-1">
               {measurement.reactorHotspotTemperatureC}
             </div>
-            <div className="text-sm text-green-500">°C on Hotspot</div>
+            <div className="text-sm text-sensor-1">°C on Hotspot</div>
           </div>
         </div>
         <div className="flex-1">
           <div className="flex flex-col">
-            <div className="text-4xl text-blue-500">
+            <div className="text-4xl text-sensor-2">
               {measurement.reactorOutletTemperatureC}
             </div>
-            <div className="text-sm text-blue-500">°C on Outlet</div>
+            <div className="text-sm text-sensor-2">°C on Outlet</div>
           </div>
         </div>
       </div>

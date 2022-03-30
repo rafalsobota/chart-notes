@@ -36,10 +36,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ year, date }) => {
 
   return (
     <div className="space-y-3">
-      <h1 className="pt-10 text-4xl text-center text-slate-900">
+      <h1 className="pt-10 text-4xl text-center text-gray-900">
         Reactor Temperature
       </h1>
-      <h2 className="text-center text-md text-slate-500">
+      <h2 className="text-center text-gray-500 text-md">
         <Link href={`/${year - 1}`}>
           <button className="p-2">
             <ArrowSmLeftIcon className="h-5 -mb-1 active:-ml-1 active:mr-1" />

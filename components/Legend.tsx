@@ -28,20 +28,20 @@ export const Legend: React.FC<LegendProps> = ({ data }) => {
 
   return (
     <div>
-      <div className="p-5 mx-auto w-fit flex flex-row space-x-5 items-baseline text-gray-400">
+      <div className="flex flex-row items-baseline p-5 mx-auto space-x-5 text-gray-400 w-fit">
         {[
           {
             name: "Hotspot",
-            color: "text-green-500",
+            color: "text-sensor-1",
             sensor: "reactorHotspotTemperatureC",
           },
           {
             name: "Outlet",
-            color: "text-blue-500",
+            color: "text-sensor-2",
             sensor: "reactorOutletTemperatureC",
           },
         ].map(({ name, color, sensor }) => (
-          <div className="text-sm flex flex-col text-right" key={name}>
+          <div className="flex flex-col text-sm text-right" key={name}>
             <div className={`flex flex-row items-baseline ${color}`}>
               <MinusIcon className="h-3 mx-1" />
               °C on {name}

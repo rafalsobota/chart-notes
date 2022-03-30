@@ -38,7 +38,7 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
   }
 
   return (
-    <div className="py-5 pb-10 md:px-14 bg-slate-50">
+    <div className="py-5 pb-10 md:px-14 bg-gray-50">
       <div className="max-w-2xl mx-auto space-y-10">
         {visibbleMeasurements.map((measurement) => (
           <div
@@ -48,13 +48,13 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
             }
             className={`md:rounded-2xl p-5 scroll-my-16 ${
               selectedDate === measurement.date
-                ? "ring-blue-500 ring-4 ring-opacity-50 relative bg-white bg-opacity-50"
+                ? "ring-primary-500 ring-2 relative"
                 : ""
             }`}
           >
             {selectedDate === measurement.date ? (
               <div
-                className="absolute top-0 right-0 p-3 text-blue-500 cursor-pointer"
+                className="absolute top-0 right-0 p-3 cursor-pointer text-primary-500"
                 onClick={unselectDate}
               >
                 <XIcon className="h-5" />

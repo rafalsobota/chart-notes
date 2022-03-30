@@ -23,7 +23,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
   return (
     <div
       className={
-        `text-left p-3 rounded-md text-xs break-all relative group-card border flex-row flex space-x-2 bg-white border-slate-200 ` +
+        `text-left p-3 rounded-md text-xs break-all relative group-card border flex-row flex space-x-2 bg-white border-gray-200 ` +
         className
       }
     >
@@ -43,12 +43,12 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       <div className="flex-grow">{note.note}</div>
       {note.metrics.includes("reactorHotspotTemperatureC") ? (
         <div>
-          <BookmarkIcon className="h-4 text-green-500" />
+          <BookmarkIcon className="h-4 text-sensor-1" />
         </div>
       ) : null}
       {note.metrics.includes("reactorOutletTemperatureC") ? (
         <div>
-          <BookmarkIcon className="h-4 text-blue-500" />
+          <BookmarkIcon className="h-4 text-sensor-2" />
         </div>
       ) : null}
     </div>

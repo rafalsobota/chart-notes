@@ -42,17 +42,17 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
   };
 
   return (
-    <div className="p-5 text-sm bg-white border rounded-md border-slate-200">
+    <div className="p-5 text-sm bg-white border border-gray-200 rounded-md">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-5 text-left text-slate-500"
+        className="space-y-5 text-left text-gray-500"
       >
         <div className="font-semibold">New Note</div>
         <FormSection>
-          <div className="text-slate-500">Note:</div>
+          <div className="text-gray-500">Note:</div>
           <textarea
             {...register("note", { required: true })}
-            className="w-full p-3 text-sm border rounded-md border-slate-300 focus:outline-blue-500"
+            className="w-full p-3 text-sm border border-gray-300 rounded-md focus:outline-primary-500"
             placeholder="What happened?"
             autoFocus
           />
@@ -68,7 +68,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
               return (
                 <div key={id} className="flex items-center">
                   <input
-                    className="float-left w-4 h-4 mr-2 transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-blue-500 checked:border-blue-500 focus:outline-none"
+                    className="float-left w-4 h-4 mr-2 transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-primary-500 checked:border-primary-500 focus:outline-none"
                     type="radio"
                     id={id}
                     radioGroup="noteType"
@@ -98,7 +98,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
               return (
                 <div key={id} className="flex items-center">
                   <input
-                    className="float-left w-4 h-4 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 appearance-none cursor-pointer form-check-input checked:bg-blue-500 checked:border-blue-500 focus:outline-none"
+                    className="float-left w-4 h-4 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 appearance-none cursor-pointer form-check-input checked:bg-primary-500 checked:border-primary-500 focus:outline-none"
                     type="checkbox"
                     value={metric}
                     id={id}

@@ -68,7 +68,7 @@ export const MeasurementsChart = ({
             yAxisId="left"
             type="monotone"
             dataKey="reactorHotspotTemperatureC"
-            stroke="#22c55e"
+            stroke="var(--color-sensor-1)"
             name="Hotspot °C"
           />
           <Line
@@ -76,7 +76,7 @@ export const MeasurementsChart = ({
             yAxisId="left"
             type="monotone"
             dataKey="reactorOutletTemperatureC"
-            stroke="#3b82f6"
+            stroke="var(--color-sensor-2)"
             // activeDot={{ r: 8 }}
             name="Outlet °C"
           />
@@ -86,9 +86,9 @@ export const MeasurementsChart = ({
               xAxisId={0}
               yAxisId="left"
               x={selectedDate}
-              stroke="#3b82f6"
-              strokeWidth={4}
-              opacity={0.5}
+              stroke="var(--color-primary-500)"
+              strokeWidth={2}
+              opacity={1}
             />
           ) : null}
           {data

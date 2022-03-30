@@ -19,15 +19,15 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       type={type || "button"}
       onClick={onClick}
-      className={`py-2 px-4 text-sm font-medium bg-white rounded-lg border border-slate-200 hover:bg-slate-100 hover:text-blue-500 focus:z-10 focus:ring-2 focus:ring-blue-500 focus:text-blue-500 text-slate-900
+      className={`py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-500 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-500 text-gray-900
       ${
         variant === "primary"
-          ? "bg-blue-500 text-white hover:bg-blue-600 hover:text-white focus:text-white"
+          ? "bg-primary-500 text-white hover:bg-primary-600 hover:text-white focus:text-white"
           : ""
       }
       ${
         disabled
-          ? "cursor-wait bg-slate-300 hover:bg-slate-300 focus:text-slate-900"
+          ? "cursor-wait bg-gray-300 hover:bg-gray-300 focus:text-gray-900"
           : ""
       } ${className}`}
     >

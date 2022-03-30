@@ -12,20 +12,20 @@ export const MeasurementTooltip = ({
     const measurement = payload[0].payload;
     return (
       <div className="space-y-1">
-        <div className="text-gray-500 font-semibold">
+        <div className="font-semibold text-gray-500">
           {formatDate(measurement.date, true)}
         </div>
-        <div className="flex flex-row align-bottom text-green-500 items-baseline">
-          <div className="font-semibold text-xl">
+        <div className="flex flex-row items-baseline align-bottom text-sensor-1">
+          <div className="text-xl font-semibold">
             {measurement.reactorHotspotTemperatureC}
           </div>
-          <div className="text-xs pl-1">°C on Hotspot</div>
+          <div className="pl-1 text-xs">°C on Hotspot</div>
         </div>
-        <div className="flex flex-row items-baseline text-blue-500">
-          <div className="font-semibold text-xl">
+        <div className="flex flex-row items-baseline text-sensor-2">
+          <div className="text-xl font-semibold">
             {measurement.reactorOutletTemperatureC}
           </div>
-          <div className="text-xs pl-1">°C on Outlet</div>
+          <div className="pl-1 text-xs">°C on Outlet</div>
         </div>
       </div>
     );
