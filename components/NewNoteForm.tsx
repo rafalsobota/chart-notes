@@ -120,7 +120,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
         </FormSection>
         <FormActions>
           <Button onClick={onClose}>Cancel</Button>
-          <Button type="submit" disabled={disabled}>
+          <Button type="submit" variant="primary" disabled={disabled}>
             Save
           </Button>
         </FormActions>
