@@ -29,9 +29,9 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
   }, [selectedDate]);
 
   const visibbleMeasurements = useMemo(() => {
-    return measurements.filter(
-      (m) => (m.notes && m.notes.length > 0) || m.date === selectedDate
-    );
+    return measurements
+      .filter((m) => (m.notes && m.notes.length > 0) || m.date === selectedDate)
+      .reverse();
   }, [measurements, selectedDate]);
 
   if (visibbleMeasurements.length < 1) {
@@ -41,37 +41,33 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
   return (
     <div className="py-5 pb-10 md:px-14 bg-slate-50">
       <div className="max-w-2xl mx-auto space-y-10">
-        {measurements
-          .filter(
-            (m) => (m.notes && m.notes.length > 0) || m.date === selectedDate
-          )
-          .map((measurement) => (
-            <div
+        {visibbleMeasurements.map((measurement) => (
+          <div
+            key={measurement.date}
+            ref={
+              selectedDate === measurement.date ? selectedCardRef : undefined
+            }
+            className={`md:rounded-2xl p-5 scroll-mt-16 ${
+              selectedDate === measurement.date
+                ? "ring-blue-500 ring-4 ring-opacity-50 relative bg-white bg-opacity-50"
+                : ""
+            }`}
+          >
+            {selectedDate === measurement.date ? (
+              <div
+                className="absolute top-0 right-0 p-3 text-blue-500 cursor-pointer"
+                onClick={unselectDate}
+              >
+                <XIcon className="h-5" />
+              </div>
+            ) : null}
+            <MeasurementDetails
+              measurement={measurement}
               key={measurement.date}
-              ref={
-                selectedDate === measurement.date ? selectedCardRef : undefined
-              }
-              className={`md:rounded-2xl p-5 scroll-mt-16 ${
-                selectedDate === measurement.date
-                  ? "ring-blue-500 ring-4 ring-opacity-50 relative bg-white bg-opacity-50"
-                  : ""
-              }`}
-            >
-              {selectedDate === measurement.date ? (
-                <div
-                  className="absolute top-0 right-0 p-3 text-blue-500 cursor-pointer"
-                  onClick={unselectDate}
-                >
-                  <XIcon className="h-5" />
-                </div>
-              ) : null}
-              <MeasurementDetails
-                measurement={measurement}
-                key={measurement.date}
-                onDateSelected={onDateSelected}
-              />
-            </div>
-          ))}
+              onDateSelected={onDateSelected}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
