@@ -42,7 +42,7 @@ export const MeasurementDetails = ({
           </div>
         </div>
       </div>
-      <div className="space-y-5">
+      <div className="space-y-2">
         {(measurement.notes || []).map((n) => (
           <NoteCard note={n} key={n.id} />
         ))}
