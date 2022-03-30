@@ -19,7 +19,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
     deleteNoteMutation.mutate(note.id);
   }, [note.id]);
 
-  const className = note.type === "comment" ? "text-gray-500" : "text-red-500";
+  const className = note.type === "comment" ? "text-gray-600" : "text-red-500";
   return (
     <div
       className={
@@ -35,7 +35,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       </div>
       <div>
         {note.type === "comment" ? (
-          <AnnotationIcon className="h-4 text-gray-400" />
+          <AnnotationIcon className="h-4 text-gray-500" />
         ) : (
           <ExclamationIcon className="h-4 text-red-500" />
         )}
