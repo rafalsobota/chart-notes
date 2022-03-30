@@ -1,8 +1,4 @@
-import {
-  XIcon,
-  ExclamationIcon,
-  AnnotationIcon,
-} from "@heroicons/react/outline";
+import { XIcon, ExclamationIcon } from "@heroicons/react/outline";
 import { useCallback } from "react";
 import { useDeleteNoteMutation } from "../lib/api";
 import { Note } from "../lib/api/types";
@@ -26,7 +22,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
   return (
     <div
       className={
-        `text-left p-3 rounded-md text-xs break-all relative group-card flex-row flex space-x-2 bg-white ` +
+        `text-left py-3 px-2 rounded-md text-xs break-all relative group-card flex-row flex space-x-2 bg-white ` +
         className
       }
     >
@@ -34,21 +30,20 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
         className="absolute top-0 right-0 invisible p-1 -mt-2 -mr-2 text-gray-700 bg-white border border-gray-200 rounded-full cursor-pointer group-card-hover:visible active:bg-gray-100"
         onClick={onDelete}
       >
-        <XIcon className="w-3 h-3 text-red-500" />
+        <XIcon className="inline-block w-3 h-3 text-red-500" />
       </div>
       <div>
         {note.type === "comment" ? (
-          <AnnotationIcon className="inline-block h-4 text-gray-500" />
+          <div className="w-5" />
         ) : (
-          <ExclamationIcon className="h-4 text-red-500 animate-bounce" />
+          <ExclamationIcon className="w-4 text-red-500" />
         )}
       </div>
       <div className="flex-grow">{note.note}</div>
       <div>
         {note.metrics.includes("reactorHotspotTemperatureC") ? (
           <SensorIcon metric={"reactorHotspotTemperatureC"} />
-        ) : // <TagIcon className="inline-block h-4 text-sensor-1" />
-        null}
+        ) : null}
         {note.metrics.includes("reactorOutletTemperatureC") ? (
           <SensorIcon metric={"reactorOutletTemperatureC"} />
         ) : null}
