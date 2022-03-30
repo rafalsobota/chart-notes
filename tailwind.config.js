@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'sensor-1': colors.fuchsia[500],
-        'sensor-2': colors.amber[500],
+        'sensor-1': colors.violet[500],
+        'sensor-2': colors.cyan[500],
         primary: colors.blue
       }
     },
