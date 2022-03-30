@@ -41,7 +41,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
         {note.type === "comment" ? (
           <AnnotationIcon className="inline-block h-4 text-gray-500" />
         ) : (
-          <ExclamationIcon className="h-4 text-red-500" />
+          <ExclamationIcon className="h-4 text-red-500 animate-pulse" />
         )}
       </div>
       <div className="flex-grow">{note.note}</div>
