@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Measurement, Note } from "../lib/api/types";
 import { formatDate } from "../lib/time";
-import { ExclamationIcon, AnnotationIcon } from "@heroicons/react/outline";
+import { ExclamationIcon, AnnotationIcon } from "@heroicons/react/solid";
 
 export const MeasurementTooltip = ({
   active,
