@@ -28,7 +28,7 @@ export const Legend: React.FC<LegendProps> = ({ data }) => {
 
   return (
     <div>
-      <div className="flex flex-row items-baseline p-5 mx-auto space-x-5 text-gray-400 w-fit">
+      <div className="flex flex-row items-baseline p-5 mx-auto space-x-5 w-fit">
         {[
           {
             name: "Hotspot",
@@ -46,7 +46,9 @@ export const Legend: React.FC<LegendProps> = ({ data }) => {
               <SensorIcon metric={sensor as MetricName} />
               °C on {name}
             </div>
-            <CommonAggregates series={series} sensor={sensor} />
+            <div className="font-light text-gray-400">
+              <CommonAggregates series={series} sensor={sensor} />
+            </div>
           </div>
         ))}
       </div>
