@@ -49,7 +49,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
       >
         <div className="font-semibold">New Note</div>
         <FormSection>
-          <div className="text-gray-500">Note:</div>
+          <div className="text-gray-500">Note</div>
           <textarea
             {...register("note", { required: true })}
             className="w-full p-3 text-sm border border-gray-300 rounded-md focus:outline-primary-500"
@@ -61,14 +61,14 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
           )}
         </FormSection>
         <FormSection>
-          <div>Type:</div>
+          <div>Type</div>
           <FormOptionsGroup>
             {noteTypes.map((type) => {
               const id = type + "Radio" + date;
               return (
                 <div key={id} className="flex items-center">
                   <input
-                    className="float-left w-4 h-4 mr-2 transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-primary-500 checked:border-primary-500 focus:outline-none"
+                    className="float-left w-4 h-4 mr-2 transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer checked:bg-primary-500 checked:border-primary-500 focus:z-10 focus:ring-2 focus:ring-primary-500"
                     type="radio"
                     id={id}
                     radioGroup="noteType"
@@ -90,7 +90,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
           )}
         </FormSection>
         <FormSection>
-          <div>Assigned Metrics:</div>
+          <div>Related Metrics</div>
 
           <FormOptionsGroup>
             {metricNames.map((metric) => {
@@ -98,7 +98,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
               return (
                 <div key={id} className="flex items-center">
                   <input
-                    className="float-left w-4 h-4 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 appearance-none cursor-pointer form-check-input checked:bg-primary-500 checked:border-primary-500 focus:outline-none"
+                    className="float-left w-4 h-4 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 appearance-none cursor-pointer form-check-input checked:bg-primary-500 checked:border-primary-500 focus:z-10 focus:ring-2 focus:ring-primary-500"
                     type="checkbox"
                     value={metric}
                     id={id}
