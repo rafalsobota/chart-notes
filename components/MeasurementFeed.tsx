@@ -1,6 +1,7 @@
 import { XIcon } from "@heroicons/react/outline";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Measurement, Timestamp } from "../lib/api";
+import { scrollIntoView } from "../lib/viewport";
 import { MeasurementDetails } from "./MeasurementDetails";
 
 export type MeasurementsFeedProps = {
@@ -22,9 +23,7 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
 
   useEffect(() => {
     if (selectedDate && selectedCardRef.current) {
-      selectedCardRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
+      scrollIntoView(selectedCardRef.current);
     }
   }, [selectedDate]);
 
@@ -47,7 +46,7 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
             ref={
               selectedDate === measurement.date ? selectedCardRef : undefined
             }
-            className={`md:rounded-2xl p-5 scroll-mt-16 ${
+            className={`md:rounded-2xl p-5 scroll-my-16 ${
               selectedDate === measurement.date
                 ? "ring-blue-500 ring-4 ring-opacity-50 relative bg-white bg-opacity-50"
                 : ""
