@@ -20,7 +20,7 @@ export const MeasurementDetails = ({
   return (
     <div className="flex flex-col space-y-5 group">
       <div className="space-y-2">
-        <div className="flex flex-row text-center text-gray-400 text-md">
+        <div className="flex flex-row text-center text-black text-opacity-40 text-md">
           <div onClick={select} className="p-2 mx-auto -m-2 cursor-pointer">
             {formatDate(measurement.date, true)}
           </div>

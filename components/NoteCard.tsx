@@ -24,7 +24,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
   return (
     <div
       className={
-        `text-left p-3 rounded-md text-xs break-all relative group-card border flex-row flex space-x-2 bg-white border-gray-200 ` +
+        `text-left p-3 rounded-md text-xs break-all relative group-card border-0 flex-row flex space-x-2 bg-white border-gray-200 ` +
         className
       }
     >
