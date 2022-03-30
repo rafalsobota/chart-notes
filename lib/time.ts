@@ -13,7 +13,7 @@ export const parseYear = (year: string | string[] | undefined): number => {
   } catch (e) {
     return new Date().getFullYear();
   }
-}
+};
 
 export const formatDate = (date: Timestamp, year?: boolean) => {
   return format(new Date(date), year ? "d.MM.yyyy" : "d.MM");
@@ -30,4 +30,4 @@ export const parseDate = (date: string | string[] | undefined): number | undefin
   } catch (e) {
     return undefined;
   }
-}
+};

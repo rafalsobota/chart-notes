@@ -11,7 +11,7 @@ export type Measurement = {
   reactorOutletTemperatureC: number,
   reactorHotspotTemperatureC: number,
   notes?: Note[]
-}
+};
 
 export type Note = {
   id: number;
@@ -19,10 +19,10 @@ export type Note = {
   note: string;
   type: NoteType;
   metrics: MetricName[];
-}
+};
 
 export type NewNote = { date: number, note: string, type: NoteType, metrics: MetricName[] };
 
 export type ErrorResponse = {
   errors: { [fieldName: string]: string }
-}
+};
