@@ -121,7 +121,8 @@ export const MeasurementsChart = ({
                     xAxisId={0}
                     yAxisId="left"
                     fill={note.type === "alert" ? "red" : "gray"}
-                    stroke="white"
+                    // stroke="white"
+                    stroke={note.type === "alert" ? "red" : "white"}
                     opacity={note.type === "alert" ? 1 : 0.5}
                     r={3}
                   />

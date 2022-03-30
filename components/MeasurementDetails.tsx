@@ -19,26 +19,28 @@ export const MeasurementDetails = ({
 
   return (
     <div className="flex flex-col space-y-5 group">
-      <div className="flex flex-row text-center text-gray-400 text-md">
-        <div onClick={select} className="p-2 mx-auto -m-2 cursor-pointer">
-          {formatDate(measurement.date, true)}
-        </div>
-      </div>
-      <div className="flex flex-row space-x-5 justify-evenly">
-        <div className="flex-1 text-right">
-          <div className="flex flex-col">
-            <div className="text-4xl text-sensor-1">
-              {measurement.reactorHotspotTemperatureC}
-            </div>
-            <div className="text-sm text-sensor-1">°C on Hotspot</div>
+      <div className="space-y-2">
+        <div className="flex flex-row text-center text-gray-400 text-md">
+          <div onClick={select} className="p-2 mx-auto -m-2 cursor-pointer">
+            {formatDate(measurement.date, true)}
           </div>
         </div>
-        <div className="flex-1">
-          <div className="flex flex-col">
-            <div className="text-4xl text-sensor-2">
-              {measurement.reactorOutletTemperatureC}
+        <div className="flex flex-row space-x-5 justify-evenly">
+          <div className="flex-1 text-right">
+            <div className="flex flex-col">
+              <div className="text-4xl text-sensor-1">
+                {measurement.reactorHotspotTemperatureC}
+              </div>
+              <div className="text-sm text-sensor-1">°C on Hotspot</div>
             </div>
-            <div className="text-sm text-sensor-2">°C on Outlet</div>
+          </div>
+          <div className="flex-1">
+            <div className="flex flex-col">
+              <div className="text-4xl text-sensor-2">
+                {measurement.reactorOutletTemperatureC}
+              </div>
+              <div className="text-sm text-sensor-2">°C on Outlet</div>
+            </div>
           </div>
         </div>
       </div>
