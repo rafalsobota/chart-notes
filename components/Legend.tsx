@@ -1,4 +1,3 @@
-import { MinusIcon } from "@heroicons/react/outline";
 import { Measurement, MetricName } from "../lib/api/types";
 import { Time, TimeSeries, timeSeries } from "pondjs";
 import { useMemo } from "react";

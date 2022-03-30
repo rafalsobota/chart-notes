@@ -2,9 +2,7 @@ import {
   XIcon,
   ExclamationIcon,
   AnnotationIcon,
-  TagIcon,
 } from "@heroicons/react/outline";
-// import { TagIcon } from "@heroicons/react/solid";
 import { useCallback } from "react";
 import { useDeleteNoteMutation } from "../lib/api";
 import { Note } from "../lib/api/types";

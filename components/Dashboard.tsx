@@ -39,7 +39,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ year, date }) => {
       <h1 className="pt-10 text-4xl text-center text-gray-900">
         Reactor Temperature
       </h1>
-      <h2 className="text-center text-gray-500 text-md">
+      <h2 className="text-center text-gray-400 text-md">
         <Link href={`/${year - 1}`}>
           <button className="p-2">
             <ArrowSmLeftIcon className="h-5 -mb-1 active:-ml-1 active:mr-1" />
