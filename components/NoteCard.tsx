@@ -20,11 +20,14 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
     deleteNoteMutation.mutate(note.id);
   }, [note.id]);
 
-  const className = note.type === "comment" ? "text-gray-600" : "text-red-500";
+  const className =
+    note.type === "comment"
+      ? "text-gray-600"
+      : "text-gray-600 border-l-2 border-l-red-500";
   return (
     <div
       className={
-        `text-left p-3 rounded-md text-xs break-all relative group-card border-0 flex-row flex space-x-2 bg-white border-gray-200 ` +
+        `text-left p-3 rounded-md text-xs break-all relative group-card flex-row flex space-x-2 bg-white ` +
         className
       }
     >

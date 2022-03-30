@@ -72,7 +72,9 @@ const NoteTooltip: React.FC<NoteTooltipProps> = ({ note }) => {
   const className =
     note.type === "alert" ? "bg-red-500 text-white" : "bg-gray-500 text-white";
   return (
-    <div className={`max-w-sm p-2 text-xs  truncate  rounded-md ${className}`}>
+    <div
+      className={`max-w-xs md:max-w-sm p-2 text-xs  truncate  rounded-md ${className}`}
+    >
       {note.type === "alert" ? (
         <ExclamationIcon className="inline-block h-3 pr-1" />
       ) : (
