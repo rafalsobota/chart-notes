@@ -48,7 +48,7 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
             }
             className={`md:rounded-2xl p-5 scroll-my-16 ${
               selectedDate === measurement.date
-                ? "ring-primary-500 ring-2 relative"
+                ? "ring-primary-500 ring-2 relative bg-primary-50 "
                 : ""
             }`}
           >
