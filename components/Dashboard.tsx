@@ -2,18 +2,18 @@ import { useMeasurements } from "../lib/api";
 import { Timestamp } from "../lib/api/types";
 import { useCallback, useEffect, useState } from "react";
 import { EmptyChart } from "./EmptyChart";
-import { MeasurementChart } from "./MeasurementChart";
+import { MeasurementsChart } from "./MeasurementsChart";
 import Link from "next/link";
 import { ArrowSmLeftIcon, ArrowSmRightIcon } from "@heroicons/react/outline";
 import { MeasurementsFeed } from "./MeasurementFeed";
 import { useRouter } from "next/router";
 
-export type MetricsProps = {
+export type DashboardProps = {
   year: number;
   date?: number;
 };
 
-export const Dashboard: React.FC<MetricsProps> = ({ year, date }) => {
+export const Dashboard: React.FC<DashboardProps> = ({ year, date }) => {
   const { data, status } = useMeasurements(year);
   const [selectedDate, setDate] = useState<Timestamp | undefined>(date);
   const router = useRouter();
@@ -39,7 +39,7 @@ export const Dashboard: React.FC<MetricsProps> = ({ year, date }) => {
       <h1 className="pt-10 text-4xl text-center text-slate-900">
         Reactor Temperature
       </h1>
-      <h1 className="text-center text-md text-slate-500">
+      <h2 className="text-center text-md text-slate-500">
         <Link href={`/${year - 1}`}>
           <button className="p-2">
             <ArrowSmLeftIcon className="h-5 -mb-1 active:-ml-1 active:mr-1" />
@@ -51,7 +51,7 @@ export const Dashboard: React.FC<MetricsProps> = ({ year, date }) => {
             <ArrowSmRightIcon className="h-5 -mb-1 active:-mr-1 active:ml-1" />
           </button>
         </Link>
-      </h1>
+      </h2>
 
       {status === "loading" || status === "idle" ? (
         <EmptyChart message={"Loading..."} />
@@ -61,7 +61,7 @@ export const Dashboard: React.FC<MetricsProps> = ({ year, date }) => {
         <EmptyChart message={"No data available"} />
       ) : (
         <>
-          <MeasurementChart
+          <MeasurementsChart
             data={data}
             onDateSelected={onDateSelected}
             selectedDate={selectedDate}

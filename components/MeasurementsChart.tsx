@@ -23,17 +23,17 @@ const tickFormatter = (date: Timestamp) => {
   return formatDate(date);
 };
 
-export type MeasurementChartProps = {
+export type MeasurementsChartProps = {
   data: Measurement[];
   onDateSelected: (date: Timestamp) => void;
   selectedDate?: Timestamp;
 };
 
-export const MeasurementChart = ({
+export const MeasurementsChart = ({
   data,
   onDateSelected,
   selectedDate,
-}: MeasurementChartProps) => {
+}: MeasurementsChartProps) => {
   const onClick = useCallback(
     (e: CategoricalChartState) => {
       if (e && e.activePayload && e.activePayload.length > 0) {

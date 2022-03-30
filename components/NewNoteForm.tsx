@@ -42,7 +42,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
   };
 
   return (
-    <div className="p-5 text-sm border rounded-md shadow-lg bg-slate-50 border-slate-200">
+    <div className="p-5 text-sm bg-white border rounded-md border-slate-200">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5 text-left text-slate-500"

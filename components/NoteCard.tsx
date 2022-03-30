@@ -23,21 +23,21 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
   return (
     <div
       className={
-        `text-left p-3 rounded-md text-xs break-all relative group-card border border-transparent flex-row flex space-x-2 bg-white ` +
+        `text-left p-3 rounded-md text-xs break-all relative group-card border flex-row flex space-x-2 bg-white border-slate-200 ` +
         className
       }
     >
       <div
-        className="absolute top-0 right-0 -mt-2 -mr-2 border border-gray-200 rounded-full p-1 invisible group-card-hover:visible cursor-pointer active:bg-gray-100 text-gray-700 bg-white"
+        className="absolute top-0 right-0 invisible p-1 -mt-2 -mr-2 text-gray-700 bg-white border border-gray-200 rounded-full cursor-pointer group-card-hover:visible active:bg-gray-100"
         onClick={onDelete}
       >
-        <XIcon className="h-3 w-3 text-red-500" />
+        <XIcon className="w-3 h-3 text-red-500" />
       </div>
       <div>
         {note.type === "comment" ? (
-          <AnnotationIcon className="text-gray-400 h-4" />
+          <AnnotationIcon className="h-4 text-gray-400" />
         ) : (
-          <ExclamationIcon className="text-red-500 h-4" />
+          <ExclamationIcon className="h-4 text-red-500" />
         )}
       </div>
       <div className="flex-grow">{note.note}</div>
