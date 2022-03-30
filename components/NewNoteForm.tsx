@@ -52,7 +52,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
           <div className="text-slate-500">Note:</div>
           <textarea
             {...register("note", { required: true })}
-            className="w-full p-3 text-sm border rounded-md border-slate-300"
+            className="w-full p-3 text-sm border rounded-md border-slate-300 focus:outline-blue-500"
             placeholder="What happened?"
             autoFocus
           />
@@ -68,7 +68,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
               return (
                 <div key={id} className="flex items-center">
                   <input
-                    className="float-left w-4 h-4 mr-2 transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
+                    className="float-left w-4 h-4 mr-2 transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-blue-500 checked:border-blue-500 focus:outline-none"
                     type="radio"
                     id={id}
                     radioGroup="noteType"
@@ -76,7 +76,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
                     {...register("type", { required: true })}
                   />
                   <label
-                    className="inline-block text-gray-800 form-check-label"
+                    className="inline-block text-gray-800 cursor-pointer form-check-label"
                     htmlFor={id}
                   >
                     {fiendlyNoteTypeName(type)}
@@ -98,14 +98,14 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
               return (
                 <div key={id} className="flex items-center">
                   <input
-                    className="float-left w-4 h-4 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
+                    className="float-left w-4 h-4 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 appearance-none cursor-pointer form-check-input checked:bg-blue-500 checked:border-blue-500 focus:outline-none"
                     type="checkbox"
                     value={metric}
                     id={id}
                     {...register("metrics", { required: true })}
                   />
                   <label
-                    className="inline-block text-gray-800 form-check-label"
+                    className="inline-block text-gray-800 cursor-pointer form-check-label"
                     htmlFor={id}
                   >
                     {fiendlyNoteMetricName(metric)}

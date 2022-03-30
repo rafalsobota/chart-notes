@@ -40,7 +40,7 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
 
   return (
     <div className="py-5 pb-10 md:px-14 bg-slate-50">
-      <div className="max-w-4xl mx-auto space-y-10">
+      <div className="max-w-2xl mx-auto space-y-10">
         {measurements
           .filter(
             (m) => (m.notes && m.notes.length > 0) || m.date === selectedDate
@@ -51,9 +51,9 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
               ref={
                 selectedDate === measurement.date ? selectedCardRef : undefined
               }
-              className={`md:rounded-xl p-5 scroll-mt-16 ${
+              className={`md:rounded-2xl p-5 scroll-mt-16 ${
                 selectedDate === measurement.date
-                  ? "ring-blue-500 ring-4 ring-opacity-50 bg-white relative"
+                  ? "ring-blue-500 ring-4 ring-opacity-50 relative bg-white bg-opacity-50"
                   : ""
               }`}
             >
