@@ -1,7 +1,8 @@
 import { MinusIcon } from "@heroicons/react/outline";
-import { Measurement } from "../lib/api/types";
+import { Measurement, MetricName } from "../lib/api/types";
 import { Time, TimeSeries, timeSeries } from "pondjs";
 import { useMemo } from "react";
+import { SensorIcon } from "./SensorIcon";
 
 export type LegendProps = {
   data: Measurement[];
@@ -43,7 +44,7 @@ export const Legend: React.FC<LegendProps> = ({ data }) => {
         ].map(({ name, color, sensor }) => (
           <div className="flex flex-col text-sm text-right" key={name}>
             <div className={`flex flex-row items-baseline ${color}`}>
-              <MinusIcon className="h-3 mx-1" />
+              <SensorIcon metric={sensor as MetricName} />
               °C on {name}
             </div>
             <CommonAggregates series={series} sensor={sensor} />

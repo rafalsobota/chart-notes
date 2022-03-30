@@ -8,6 +8,7 @@ import {
 import { useCallback } from "react";
 import { useDeleteNoteMutation } from "../lib/api";
 import { Note } from "../lib/api/types";
+import { SensorIcon } from "./SensorIcon";
 
 export type NoteCardProps = {
   note: Note;
@@ -47,10 +48,11 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       <div className="flex-grow">{note.note}</div>
       <div>
         {note.metrics.includes("reactorHotspotTemperatureC") ? (
-          <TagIcon className="inline-block h-4 text-sensor-1" />
-        ) : null}
+          <SensorIcon metric={"reactorHotspotTemperatureC"} />
+        ) : // <TagIcon className="inline-block h-4 text-sensor-1" />
+        null}
         {note.metrics.includes("reactorOutletTemperatureC") ? (
-          <TagIcon className="inline-block h-4 text-sensor-2" />
+          <SensorIcon metric={"reactorOutletTemperatureC"} />
         ) : null}
       </div>
     </div>
