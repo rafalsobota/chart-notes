@@ -42,18 +42,17 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
   };
 
   return (
-    <div className="p-5 bg-slate-50 rounded-md shadow-lg border border-slate-200 text-sm">
+    <div className="p-5 text-sm border rounded-md shadow-lg bg-slate-50 border-slate-200">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5 text-left text-slate-500"
       >
         <div className="font-semibold">New Note</div>
-        <hr />
         <FormSection>
           <div className="text-slate-500">Note:</div>
           <textarea
             {...register("note", { required: true })}
-            className="border border-slate-300 p-3 rounded-md text-sm w-full"
+            className="w-full p-3 text-sm border rounded-md border-slate-300"
             placeholder="What happened?"
             autoFocus
           />
@@ -67,9 +66,9 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
             {noteTypes.map((type) => {
               const id = type + "Radio" + date;
               return (
-                <div key={id}>
+                <div key={id} className="flex items-center">
                   <input
-                    className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                    className="float-left w-4 h-4 mr-2 transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
                     type="radio"
                     id={id}
                     radioGroup="noteType"
@@ -77,7 +76,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
                     {...register("type", { required: true })}
                   />
                   <label
-                    className="form-check-label inline-block text-gray-800"
+                    className="inline-block text-gray-800 form-check-label"
                     htmlFor={id}
                   >
                     {fiendlyNoteTypeName(type)}
@@ -97,16 +96,16 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
             {metricNames.map((metric) => {
               const id = metric + "Checkbox" + date;
               return (
-                <div key={id}>
+                <div key={id} className="flex items-center">
                   <input
-                    className="form-check-input form-check-input appearance-none h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                    className="float-left w-4 h-4 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
                     type="checkbox"
                     value={metric}
                     id={id}
                     {...register("metrics", { required: true })}
                   />
                   <label
-                    className="form-check-label inline-block text-gray-800"
+                    className="inline-block text-gray-800 form-check-label"
                     htmlFor={id}
                   >
                     {fiendlyNoteMetricName(metric)}
@@ -119,7 +118,6 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
             <div className="text-red-500">At least one value is required</div>
           )}
         </FormSection>
-        <hr />
         <FormActions>
           <Button onClick={onClose}>Cancel</Button>
           <Button type="submit" disabled={disabled}>
@@ -154,12 +152,12 @@ const FormSection: React.FC<{}> = ({ children }) => {
 };
 
 const FormActions: React.FC<{}> = ({ children }) => {
-  return <div className="flex flex-row space-x-2 justify-end">{children}</div>;
+  return <div className="flex flex-row justify-end space-x-2">{children}</div>;
 };
 
 const FormOptionsGroup: React.FC<{}> = ({ children }) => {
   return (
-    <div className="flex justify-start space-y-2 md:space-x-5 md:space-y-0 flex-col md:flex-row">
+    <div className="flex flex-col justify-start space-y-2 md:space-x-5 md:space-y-0 md:flex-row">
       {children}
     </div>
   );
