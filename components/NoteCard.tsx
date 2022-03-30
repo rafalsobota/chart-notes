@@ -2,8 +2,9 @@ import {
   XIcon,
   ExclamationIcon,
   AnnotationIcon,
-  BookmarkIcon,
+  TagIcon,
 } from "@heroicons/react/outline";
+// import { TagIcon } from "@heroicons/react/solid";
 import { useCallback } from "react";
 import { useDeleteNoteMutation } from "../lib/api";
 import { Note } from "../lib/api/types";
@@ -43,10 +44,10 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       <div className="flex-grow">{note.note}</div>
       <div>
         {note.metrics.includes("reactorHotspotTemperatureC") ? (
-          <BookmarkIcon className="inline-block h-4 text-sensor-1" />
+          <TagIcon className="inline-block h-4 text-sensor-1" />
         ) : null}
         {note.metrics.includes("reactorOutletTemperatureC") ? (
-          <BookmarkIcon className="inline-block h-4 text-sensor-2" />
+          <TagIcon className="inline-block h-4 text-sensor-2" />
         ) : null}
       </div>
     </div>
