@@ -76,7 +76,7 @@ const NoteTooltip: React.FC<NoteTooltipProps> = ({ note }) => {
       className={`max-w-xs md:max-w-sm p-2 text-xs  truncate  rounded-md ${className}`}
     >
       {note.type === "alert" ? (
-        <ExclamationIcon className="inline-block h-3 pr-1 animate-bounce" />
+        <ExclamationIcon className="inline-block h-3 pr-1" />
       ) : (
         <AnnotationIcon className="inline-block h-3 pr-1" />
       )}
