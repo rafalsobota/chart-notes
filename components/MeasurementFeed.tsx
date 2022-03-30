@@ -1,5 +1,5 @@
 import { XIcon } from "@heroicons/react/outline";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Measurement, Timestamp } from "../lib/api";
 import { MeasurementDetails } from "./MeasurementDetails";
 
@@ -28,8 +28,18 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
     }
   }, [selectedDate]);
 
+  const visibbleMeasurements = useMemo(() => {
+    return measurements.filter(
+      (m) => (m.notes && m.notes.length > 0) || m.date === selectedDate
+    );
+  }, [measurements, selectedDate]);
+
+  if (visibbleMeasurements.length < 1) {
+    return null;
+  }
+
   return (
-    <div className="md:px-14 bg-slate-50 py-5 pb-10">
+    <div className="py-5 pb-10 md:px-14 bg-slate-50">
       <div className="max-w-4xl mx-auto space-y-10">
         {measurements
           .filter(
