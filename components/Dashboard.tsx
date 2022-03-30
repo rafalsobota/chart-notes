@@ -32,10 +32,10 @@ export const Dashboard: React.FC<MetricsProps> = ({ year, date }) => {
 
   return (
     <div className="space-y-3">
-      <h1 className="text-4xl pt-10 text-center text-slate-900">
+      <h1 className="pt-10 text-4xl text-center text-slate-900">
         Reactor Temperature
       </h1>
-      <h1 className="text-md text-center text-slate-500">
+      <h1 className="text-center text-md text-slate-500">
         <Link href={`/${year - 1}`}>
           <button className="p-2">
             <ArrowSmLeftIcon className="h-5 -mb-1 active:-ml-1 active:mr-1" />
@@ -69,12 +69,6 @@ export const Dashboard: React.FC<MetricsProps> = ({ year, date }) => {
           />
         </>
       )}
-      {/* <div className="p-10 m-10 bg-white">saddsa</div> */}
-      {/* <AnnotationsFeed /> */}
-      {/* <MeasurementDetailsModal
-        onClose={onDateUnselected}
-        measurement={selectedMeasurement}
-      /> */}
     </div>
   );
 };
