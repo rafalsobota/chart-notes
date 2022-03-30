@@ -50,7 +50,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
   };
 
   return (
-    <FormCard>
+    <FormCard className="shadow-xl">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="text-left text-gray-500"
