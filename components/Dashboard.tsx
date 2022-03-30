@@ -1,6 +1,6 @@
 import { useMeasurements } from "../lib/api";
 import { Timestamp } from "../lib/api/types";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { EmptyChart } from "./EmptyChart";
 import { MeasurementChart } from "./MeasurementChart";
 import Link from "next/link";
@@ -17,6 +17,10 @@ export const Dashboard: React.FC<MetricsProps> = ({ year, date }) => {
   const { data, status } = useMeasurements(year);
   const [selectedDate, setDate] = useState<Timestamp | undefined>(date);
   const router = useRouter();
+
+  useEffect(() => {
+    setDate(date);
+  }, [date, setDate]);
 
   const onDateSelected = useCallback(
     (date?: Timestamp) => {
