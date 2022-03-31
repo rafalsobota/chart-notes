@@ -36,11 +36,13 @@ export const MeasurementChartTooltip: React.FC<
           {formatDate(measurement.date, true)}
         </div>
         {metricNames.map((metric) => {
-          <MetricTooltip
-            metric={metric}
-            measurement={measurement}
-            key={metric + `-label`}
-          />;
+          return (
+            <MetricTooltip
+              metric={metric}
+              measurement={measurement}
+              key={metric + `-label`}
+            />
+          );
         })}
         {notesSummary.recentNote && (
           <div className="flex flex-row items-center max-w-xs md:max-w-sm">
