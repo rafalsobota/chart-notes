@@ -27,28 +27,28 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
     }
   }, [selectedDate]);
 
-  const visibbleMeasurements = useMemo(() => {
+  const visibleMeasurements = useMemo(() => {
     return measurements
       .filter((m) => (m.notes && m.notes.length > 0) || m.date === selectedDate)
       .reverse();
   }, [measurements, selectedDate]);
 
-  if (visibbleMeasurements.length < 1) {
+  if (visibleMeasurements.length < 1) {
     return null;
   }
 
   return (
     <div className="py-5 pb-10 md:px-14 bg-gray-50">
       <div className="max-w-2xl mx-auto space-y-10">
-        {visibbleMeasurements.map((measurement) => (
+        {visibleMeasurements.map((measurement) => (
           <div
             key={measurement.date}
             ref={
               selectedDate === measurement.date ? selectedCardRef : undefined
             }
-            className={`md:rounded-2xl p-5 scroll-my-16 ${
+            className={`md:rounded-xl p-5 scroll-my-16 ${
               selectedDate === measurement.date
-                ? "ring-primary-500 ring-2 relative bg-primary-50 "
+                ? "ring-primary-500 ring-2 relative"
                 : ""
             }`}
           >
