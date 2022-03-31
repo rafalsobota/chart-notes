@@ -1,27 +1,13 @@
-import { Measurement, MetricName, metricNames } from "../lib/api/types";
-import { Time, TimeSeries, timeSeries } from "pondjs";
-import { useMemo } from "react";
+import { Measurement, MetricName } from "../lib/api/types";
+import { Time, TimeSeries } from "pondjs";
 import { MetricIcon } from "./MetricIcon";
 import { metricLabel, metricTextColor } from "../lib/api/models/metrics";
 
 export type LegendProps = {
   data: Measurement[];
+  series: TimeSeries<Time>;
 };
-export const Legend: React.FC<LegendProps> = ({ data }) => {
-  const series = useMemo(() => {
-    const series = timeSeries({
-      name: "measurements",
-      columns: ["time", ...metricNames],
-      points: data.map((measurement) => {
-        return [
-          measurement.date,
-          ...metricNames.map((name) => measurement[name]),
-        ];
-      }),
-    });
-    return series;
-  }, [data]);
-
+export const Legend: React.FC<LegendProps> = ({ data, series }) => {
   return (
     <div>
       <div className="flex flex-row items-baseline p-5 mx-auto space-x-5 w-fit">
@@ -75,9 +61,9 @@ const CommonAggregates: React.FC<CommonAggregatesProps> = ({
 }) => {
   return (
     <div className="text-left text-gray-400">
-      <Aggregate name="min" value={series.min(metric)} />
-      <Aggregate name="average" value={series.avg(metric)} />
       <Aggregate name="max" value={series.max(metric)} />
+      <Aggregate name="average" value={series.avg(metric)} />
+      <Aggregate name="min" value={series.min(metric)} />
     </div>
   );
 };

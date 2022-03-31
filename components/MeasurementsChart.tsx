@@ -1,6 +1,8 @@
+import { Time, TimeSeries, timeSeries } from "pondjs";
 import { useCallback, useMemo } from "react";
 import {
   CartesianGrid,
+  Label,
   Line,
   LineChart,
   ReferenceDot,
@@ -11,13 +13,48 @@ import {
   YAxis,
 } from "recharts";
 import { CategoricalChartState } from "recharts/types/chart/generateCategoricalChart";
-import { Measurement, Timestamp } from "../lib/api/types";
+import {
+  Measurement,
+  MetricName,
+  metricNames,
+  Timestamp,
+} from "../lib/api/types";
 import { formatDate } from "../lib/time";
 import { Legend } from "./Legend";
 import { MeasurementChartTooltip } from "./MeasurementChartTooltip";
 
 const xAxisTickFormatter = (date: Timestamp) => {
   return formatDate(date);
+};
+
+type AggregateLineProps = {
+  label: string;
+  y: number;
+  color: string;
+  variant?: "solid" | "dashed";
+};
+
+const AggregateLine: React.FC<AggregateLineProps> = ({
+  label,
+  y,
+  color,
+  variant,
+}) => {
+  return (
+    <ReferenceLine
+      xAxisId={0}
+      yAxisId="left"
+      y={y}
+      stroke={color}
+      strokeWidth={1}
+      strokeDasharray={variant === "dashed" ? "3 3" : undefined}
+      opacity={0.5}
+    >
+      <Label fontSize={10} color={color} position="right" fill={color}>
+        {label}
+      </Label>
+    </ReferenceLine>
+  );
 };
 
 export type MeasurementsChartProps = {
@@ -31,6 +68,25 @@ export const MeasurementsChart = ({
   onDateSelected,
   selectedDate,
 }: MeasurementsChartProps) => {
+  const series = useMemo(() => {
+    const series = timeSeries({
+      name: "measurements",
+      columns: ["time", ...metricNames],
+      points: data.map((measurement) => {
+        return [
+          measurement.date,
+          ...metricNames.map((name) => measurement[name]),
+        ];
+      }),
+    });
+    return series;
+  }, [data]);
+
+  const yMin =
+    Math.min(series.min(metricNames[0]), series.min(metricNames[1])) - 5;
+  const yMax =
+    Math.max(series.max(metricNames[0]), series.max(metricNames[1])) + 5;
+
   const onClick = useCallback(
     (e: CategoricalChartState) => {
       if (e && e.activePayload && e.activePayload.length > 0) {
@@ -85,15 +141,51 @@ export const MeasurementsChart = ({
           <XAxis
             dataKey="date"
             tickFormatter={xAxisTickFormatter}
-            tick={{ fontSize: 14, fill: "#9ca3af" }}
-            axisLine={{ stroke: "#9ca3af" }}
+            tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
+            axisLine={{ stroke: "var(--color-gray-400)" }}
+            scale="time"
           />
           <YAxis
             yAxisId="left"
-            tick={{ fontSize: 14, fill: "#9ca3af" }}
-            axisLine={{ stroke: "#9ca3af" }}
+            tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
+            axisLine={{ stroke: "var(--color-gray-400)" }}
+            domain={[yMin, yMax]}
           />
           <Tooltip content={MeasurementChartTooltip as any} />
+          {AggregateLine({
+            label: "avg",
+            y: series.avg(metricNames[0]),
+            color: "var(--color-sensor-1)",
+          })}
+          {AggregateLine({
+            label: "min",
+            y: series.min(metricNames[0]),
+            color: "var(--color-sensor-1)",
+            variant: "dashed",
+          })}
+          {AggregateLine({
+            label: "max",
+            y: series.max(metricNames[0]),
+            color: "var(--color-sensor-1)",
+            variant: "dashed",
+          })}
+          {AggregateLine({
+            label: "avg",
+            y: series.avg(metricNames[1]),
+            color: "var(--color-sensor-2)",
+          })}
+          {AggregateLine({
+            label: "min",
+            y: series.min(metricNames[1]),
+            color: "var(--color-sensor-2)",
+            variant: "dashed",
+          })}
+          {AggregateLine({
+            label: "max",
+            y: series.max(metricNames[1]),
+            color: "var(--color-sensor-2)",
+            variant: "dashed",
+          })}
           <Line
             dot={false}
             yAxisId="left"
@@ -152,7 +244,7 @@ export const MeasurementsChart = ({
           })}
         </LineChart>
       </ResponsiveContainer>
-      <Legend data={data} />
+      <Legend data={data} series={series} />
     </div>
   );
 };
