@@ -39,7 +39,7 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
 
   return (
     <div className="py-5 bg-gray-50">
-      <div className="max-w-2xl mx-auto space-y-10">
+      <div className="max-w-2xl mx-auto space-y-5">
         {visibleMeasurements.map((measurement) => (
           <div
             key={measurement.date}
