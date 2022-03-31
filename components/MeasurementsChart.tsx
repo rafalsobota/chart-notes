@@ -16,10 +16,7 @@ import { formatDate } from "../lib/time";
 import { Legend } from "./Legend";
 import { MeasurementChartTooltip } from "./MeasurementChartTooltip";
 
-const tickFormatter = (date: Timestamp) => {
-  if (typeof date !== "number") {
-    console.error("tickFormatter: date is not a number", date);
-  }
+const xAxisTickFormatter = (date: Timestamp) => {
   return formatDate(date);
 };
 
@@ -46,7 +43,7 @@ export const MeasurementsChart = ({
     [onDateSelected]
   );
 
-  const redDots = useMemo(() => {
+  const alertDots = useMemo(() => {
     return data.flatMap((measurement) => {
       return (measurement.notes || [])
         .filter((note) => note.type === "alert")
@@ -62,7 +59,7 @@ export const MeasurementsChart = ({
     });
   }, [data]);
 
-  const grayLines = useMemo(() => {
+  const noteLines = useMemo(() => {
     const positions = data.flatMap((measurement) => {
       return (measurement.notes || []).map((note) => {
         return measurement.date;
@@ -85,8 +82,17 @@ export const MeasurementsChart = ({
           onClick={onClick}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" tickFormatter={tickFormatter} opacity="0.5" />
-          <YAxis yAxisId="left" opacity="0.5" />
+          <XAxis
+            dataKey="date"
+            tickFormatter={xAxisTickFormatter}
+            tick={{ fontSize: 14, fill: "#9ca3af" }}
+            axisLine={{ stroke: "#9ca3af" }}
+          />
+          <YAxis
+            yAxisId="left"
+            tick={{ fontSize: 14, fill: "#9ca3af" }}
+            axisLine={{ stroke: "#9ca3af" }}
+          />
           <Tooltip content={MeasurementChartTooltip as any} />
           <Line
             dot={false}
@@ -115,7 +121,7 @@ export const MeasurementsChart = ({
               opacity={1}
             />
           ) : null}
-          {grayLines.map((date) => {
+          {noteLines.map((date) => {
             return (
               <ReferenceLine
                 key={date}
@@ -129,7 +135,7 @@ export const MeasurementsChart = ({
               />
             );
           })}
-          {redDots.map((dot) => {
+          {alertDots.map((dot) => {
             return (
               <ReferenceDot
                 key={dot.id + "-" + dot.y}
