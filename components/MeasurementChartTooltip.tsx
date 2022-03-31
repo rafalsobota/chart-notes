@@ -1,6 +1,6 @@
-import { Measurement, Note } from "../lib/api/types";
+import { Measurement, MetricName, metricNames, Note } from "../lib/api/types";
 import { formatDate } from "../lib/time";
-import { metricLabel } from "../lib/api/models/metrics";
+import { metricLabel, metricTextColor } from "../lib/api/models/metrics";
 import { NoteCard } from "./NoteCard";
 
 type NotesSummary = {
@@ -35,22 +35,13 @@ export const MeasurementChartTooltip: React.FC<
         <div className="font-semibold text-gray-600 bg-white">
           {formatDate(measurement.date, true)}
         </div>
-        <div className="flex flex-row items-baseline align-bottom bg-white text-sensor-1">
-          <div className="text-xl font-semibold">
-            {measurement.reactorHotspotTemperatureC}
-          </div>
-          <div className="pl-1 text-xs">
-            {metricLabel("reactorHotspotTemperatureC")}
-          </div>
-        </div>
-        <div className="flex flex-row items-baseline bg-white text-sensor-2">
-          <div className="text-xl font-semibold">
-            {measurement.reactorOutletTemperatureC}
-          </div>
-          <div className="pl-1 text-xs">
-            {metricLabel("reactorOutletTemperatureC")}
-          </div>
-        </div>
+        {metricNames.map((metric) => {
+          <MetricTooltip
+            metric={metric}
+            measurement={measurement}
+            key={metric + `-label`}
+          />;
+        })}
         {notesSummary.recentNote && (
           <div className="flex flex-row items-center max-w-xs md:max-w-sm">
             <NoteCard note={notesSummary.recentNote} variant="small" />
@@ -71,4 +62,28 @@ export const MeasurementChartTooltip: React.FC<
   } else {
     return null;
   }
+};
+
+type MetricTooltipProps = {
+  key?: string;
+  metric: MetricName;
+  measurement: Measurement;
+};
+
+export const MetricTooltip: React.FC<MetricTooltipProps> = ({
+  key,
+  metric,
+  measurement,
+}) => {
+  return (
+    <div
+      className={`flex flex-row items-baseline align-bottom bg-white ${metricTextColor(
+        metric
+      )}`}
+      key={key}
+    >
+      <div className="text-xl font-semibold">{measurement[metric]}</div>
+      <div className="pl-1 text-xs">{metricLabel(metric)}</div>
+    </div>
+  );
 };

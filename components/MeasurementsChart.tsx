@@ -26,29 +26,6 @@ import { MeasurementChartTooltip } from "./MeasurementChartTooltip";
 
 const halfADay = 1000 * 60 * 60 * 12;
 
-const AggregateLine: React.FC<AggregateLineProps> = ({
-  label,
-  y,
-  color,
-  variant,
-}) => {
-  return (
-    <ReferenceLine
-      xAxisId={0}
-      yAxisId="left"
-      y={y}
-      stroke={color}
-      strokeWidth={1}
-      strokeDasharray={variant === "dashed" ? "3 3" : undefined}
-      opacity={0.5}
-    >
-      <Label fontSize={10} color={color} position="right" fill={color}>
-        {label}
-      </Label>
-    </ReferenceLine>
-  );
-};
-
 export type MeasurementsChartProps = {
   data: Measurement[];
   onDateSelected: (date: Timestamp) => void;
@@ -74,10 +51,14 @@ export const MeasurementsChart = ({
     return series;
   }, [data]);
 
-  const yMin =
-    Math.min(series.min(metricNames[0]), series.min(metricNames[1])) - 5;
-  const yMax =
-    Math.max(series.max(metricNames[0]), series.max(metricNames[1])) + 5;
+  const yMin = useMemo(
+    () => Math.min(series.min(metricNames[0]), series.min(metricNames[1])) - 5,
+    [series]
+  );
+  const yMax = useMemo(
+    () => Math.max(series.max(metricNames[0]), series.max(metricNames[1])) + 5,
+    [series]
+  );
 
   const onClick = useCallback(
     (e: CategoricalChartState) => {
@@ -144,56 +125,7 @@ export const MeasurementsChart = ({
             domain={[yMin, yMax]}
           />
           <Tooltip content={MeasurementChartTooltip as any} />
-          {AggregateLine({
-            label: "avg",
-            y: series.avg(metricNames[0]),
-            color: metricVarColor(metricNames[0]),
-          })}
-          {AggregateLine({
-            label: "min",
-            y: series.min(metricNames[0]),
-            color: metricVarColor(metricNames[0]),
-            variant: "dashed",
-          })}
-          {AggregateLine({
-            label: "max",
-            y: series.max(metricNames[0]),
-            color: metricVarColor(metricNames[0]),
-            variant: "dashed",
-          })}
-          {AggregateLine({
-            label: "avg",
-            y: series.avg(metricNames[1]),
-            color: metricVarColor(metricNames[1]),
-          })}
-          {AggregateLine({
-            label: "min",
-            y: series.min(metricNames[1]),
-            color: metricVarColor(metricNames[1]),
-            variant: "dashed",
-          })}
-          {AggregateLine({
-            label: "max",
-            y: series.max(metricNames[1]),
-            color: metricVarColor(metricNames[1]),
-            variant: "dashed",
-          })}
-          <Line
-            dot={false}
-            yAxisId="left"
-            type="monotone"
-            dataKey="reactorHotspotTemperatureC"
-            stroke="var(--color-sensor-1)"
-            name="Hotspot °C"
-          />
-          <Line
-            dot={false}
-            yAxisId="left"
-            type="monotone"
-            dataKey="reactorOutletTemperatureC"
-            stroke="var(--color-sensor-2)"
-            name="Outlet °C"
-          />
+          {metricNames.map((metric) => MetricLine({ metric, series }))}
           {selectedDate ? (
             <ReferenceLine
               xAxisId={0}
@@ -244,14 +176,78 @@ const xAxisTickFormatter = (date: Timestamp) => {
   return formatDate(date);
 };
 
-type AggregateLinesProps = {
-  series: TimeSeries<Time>;
-  metric: MetricName;
-};
-
 type AggregateLineProps = {
   label: string;
   y: number;
   color: string;
   variant?: "solid" | "dashed";
+  key?: string;
+};
+
+const AggregateLine: React.FC<AggregateLineProps> = ({
+  label,
+  y,
+  color,
+  variant,
+  key,
+}) => {
+  return (
+    <ReferenceLine
+      key={key}
+      xAxisId={0}
+      yAxisId="left"
+      y={y}
+      stroke={color}
+      strokeWidth={1}
+      strokeDasharray={variant === "dashed" ? "3 3" : undefined}
+      opacity={0.5}
+    >
+      <Label fontSize={10} color={color} position="right" fill={color}>
+        {label}
+      </Label>
+    </ReferenceLine>
+  );
+};
+
+type AggregateLinesProps = {
+  series: TimeSeries<Time>;
+  metric: MetricName;
+};
+
+const AggregateLines = ({ series, metric }: AggregateLinesProps) => {
+  return [
+    AggregateLine({
+      key: `${metric}-max-label`,
+      label: "max",
+      y: series.max(metric),
+      color: metricVarColor(metric),
+      variant: "dashed",
+    }),
+    AggregateLine({
+      key: `${metric}-avg-label`,
+      label: "avg",
+      y: series.avg(metric),
+      color: metricVarColor(metric),
+    }),
+    AggregateLine({
+      key: `${metric}-min-label`,
+      label: "min",
+      y: series.min(metric),
+      color: metricVarColor(metric),
+      variant: "dashed",
+    }),
+  ];
+};
+
+const MetricLine = ({ series, metric }: AggregateLinesProps) => {
+  return [
+    AggregateLines({ series, metric }),
+    <Line
+      dot={false}
+      yAxisId="left"
+      type="monotone"
+      dataKey={metric}
+      stroke={metricVarColor(metric)}
+    />,
+  ];
 };

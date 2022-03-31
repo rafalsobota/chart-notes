@@ -1,4 +1,9 @@
-import { Measurement, MetricName, Timestamp } from "../lib/api/types";
+import {
+  Measurement,
+  MetricName,
+  metricNames,
+  Timestamp,
+} from "../lib/api/types";
 import { formatDate } from "../lib/time";
 import { useCallback } from "react";
 import { AddNoteButton } from "./AddNoteButton";
@@ -27,14 +32,13 @@ export const MeasurementDetails = ({
           </div>
         </div>
         <div className="flex flex-row justify-center space-x-5">
-          <MetricValueLabel
-            value={measurement.reactorHotspotTemperatureC}
-            metric={"reactorHotspotTemperatureC"}
-          />
-          <MetricValueLabel
-            value={measurement.reactorOutletTemperatureC}
-            metric={"reactorOutletTemperatureC"}
-          />
+          {metricNames.map((metric) => (
+            <MetricValueLabel
+              value={measurement[metric]}
+              metric={metric}
+              key={metric}
+            />
+          ))}
         </div>
       </div>
       <div className="space-y-2">
@@ -52,6 +56,7 @@ export const MeasurementDetails = ({
 type MetricValueLabelProps = {
   value: number;
   metric: MetricName;
+  key?: string;
 };
 
 const MetricValueLabel: React.FC<MetricValueLabelProps> = ({

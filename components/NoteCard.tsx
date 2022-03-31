@@ -56,12 +56,9 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
         {note.note}
       </div>
       <div className={isSmall ? "pr-1" : "pr-2"}>
-        {note.metrics.includes("reactorHotspotTemperatureC") ? (
-          <MetricIcon metric={"reactorHotspotTemperatureC"} />
-        ) : null}
-        {note.metrics.includes("reactorOutletTemperatureC") ? (
-          <MetricIcon metric={"reactorOutletTemperatureC"} />
-        ) : null}
+        {note.metrics.map((metric) => (
+          <MetricIcon metric={metric} key={metric + "-icon"} />
+        ))}
       </div>
     </div>
   );
