@@ -125,6 +125,7 @@ export const MeasurementsChart = ({
                 stroke={"gray"}
                 opacity={0.5}
                 strokeWidth={1}
+                cursor="pointer"
               />
             );
           })}

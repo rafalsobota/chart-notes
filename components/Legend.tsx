@@ -1,4 +1,4 @@
-import { Measurement, MetricName } from "../lib/api/types";
+import { Measurement, MetricName, metricNames } from "../lib/api/types";
 import { Time, TimeSeries, timeSeries } from "pondjs";
 import { useMemo } from "react";
 import { MetricIcon } from "./MetricIcon";
@@ -11,16 +11,11 @@ export const Legend: React.FC<LegendProps> = ({ data }) => {
   const series = useMemo(() => {
     const series = timeSeries({
       name: "measurements",
-      columns: [
-        "time",
-        "reactorOutletTemperatureC",
-        "reactorHotspotTemperatureC",
-      ],
+      columns: ["time", ...metricNames],
       points: data.map((measurement) => {
         return [
           measurement.date,
-          measurement.reactorOutletTemperatureC,
-          measurement.reactorHotspotTemperatureC,
+          ...metricNames.map((name) => measurement[name]),
         ];
       }),
     });
