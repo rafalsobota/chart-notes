@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Measurement, Note } from "../lib/api/types";
 import { formatDate } from "../lib/time";
 import { ExclamationIcon, AnnotationIcon } from "@heroicons/react/solid";
+import { metricLabel } from "../lib/metrics";
 
 export const MeasurementTooltip = ({
   active,
@@ -47,14 +48,18 @@ export const MeasurementTooltip = ({
           <div className="text-xl font-semibold">
             {measurement.reactorHotspotTemperatureC}
           </div>
-          <div className="pl-1 text-xs">°C on Hotspot</div>
+          <div className="pl-1 text-xs">
+            {metricLabel("reactorHotspotTemperatureC")}
+          </div>
         </div>
         {recentNotes?.hotspot && <NoteTooltip note={recentNotes.hotspot} />}
         <div className="flex flex-row items-baseline bg-white text-sensor-2">
           <div className="text-xl font-semibold">
             {measurement.reactorOutletTemperatureC}
           </div>
-          <div className="pl-1 text-xs">°C on Outlet</div>
+          <div className="pl-1 text-xs">
+            {metricLabel("reactorOutletTemperatureC")}
+          </div>
         </div>
         {recentNotes?.outlet && <NoteTooltip note={recentNotes.outlet} />}
         {measurement.notes && <div></div>}

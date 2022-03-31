@@ -1,8 +1,9 @@
-import { Measurement, Timestamp } from "../lib/api/types";
+import { Measurement, MetricName, Timestamp } from "../lib/api/types";
 import { formatDate } from "../lib/time";
 import { useCallback } from "react";
 import { NoteCreator } from "./NoteCreator";
 import { NoteCard } from "./NoteCard";
+import { metricLabel, metricTextColor } from "../lib/metrics";
 
 type MeasurementDetailsProps = {
   measurement: Measurement;
@@ -25,23 +26,15 @@ export const MeasurementDetails = ({
             {formatDate(measurement.date, true)}
           </div>
         </div>
-        <div className="flex flex-row space-x-5 justify-evenly">
-          <div className="flex-1 text-right">
-            <div className="flex flex-col">
-              <div className="text-4xl text-sensor-1">
-                {measurement.reactorHotspotTemperatureC}
-              </div>
-              <div className="text-sm text-sensor-1">°C on Hotspot</div>
-            </div>
-          </div>
-          <div className="flex-1">
-            <div className="flex flex-col">
-              <div className="text-4xl text-sensor-2">
-                {measurement.reactorOutletTemperatureC}
-              </div>
-              <div className="text-sm text-sensor-2">°C on Outlet</div>
-            </div>
-          </div>
+        <div className="flex flex-row justify-center space-x-5">
+          <MetricValueLabel
+            value={measurement.reactorHotspotTemperatureC}
+            metric={"reactorHotspotTemperatureC"}
+          />
+          <MetricValueLabel
+            value={measurement.reactorOutletTemperatureC}
+            metric={"reactorOutletTemperatureC"}
+          />
         </div>
       </div>
       <div className="space-y-2">
@@ -52,6 +45,23 @@ export const MeasurementDetails = ({
           <NoteCreator date={measurement.date} />
         </div>
       </div>
+    </div>
+  );
+};
+
+type MetricValueLabelProps = {
+  value: number;
+  metric: MetricName;
+};
+
+const MetricValueLabel: React.FC<MetricValueLabelProps> = ({
+  value,
+  metric,
+}) => {
+  return (
+    <div className={`${metricTextColor(metric)}`}>
+      <div className="text-4xl">{value}</div>
+      <div className="text-sm">{metricLabel(metric)}</div>
     </div>
   );
 };

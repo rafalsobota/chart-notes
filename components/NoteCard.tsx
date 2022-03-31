@@ -2,7 +2,7 @@ import { XIcon, ExclamationIcon } from "@heroicons/react/outline";
 import { useCallback } from "react";
 import { useDeleteNoteMutation } from "../lib/api";
 import { Note } from "../lib/api/types";
-import { SensorIcon } from "./SensorIcon";
+import { MetricIcon } from "./MetricIcon";
 
 export type NoteCardProps = {
   note: Note;
@@ -42,10 +42,10 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       <div className="flex-grow">{note.note}</div>
       <div>
         {note.metrics.includes("reactorHotspotTemperatureC") ? (
-          <SensorIcon metric={"reactorHotspotTemperatureC"} />
+          <MetricIcon metric={"reactorHotspotTemperatureC"} />
         ) : null}
         {note.metrics.includes("reactorOutletTemperatureC") ? (
-          <SensorIcon metric={"reactorOutletTemperatureC"} />
+          <MetricIcon metric={"reactorOutletTemperatureC"} />
         ) : null}
       </div>
     </div>
