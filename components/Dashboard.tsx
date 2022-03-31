@@ -35,7 +35,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ year, date }) => {
   );
 
   return (
-    <div className="">
+    <div className="font-inter">
       <div className="space-y-5 bg-white">
         <h1 className="pt-10 text-4xl text-center text-gray-900">
           Reactor Temperature

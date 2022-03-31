@@ -13,11 +13,14 @@ module.exports = {
         'sensor-1': colors.purple[500],
         'sensor-2': colors.teal[500],
         primary: colors.blue
+      },
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif'],
       }
     },
     groups: [
       'card'
-    ]
+    ],
   },
   plugins: [
     plugin(({ addVariant, theme }) => {
