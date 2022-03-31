@@ -120,7 +120,7 @@ export const MeasurementsChart = ({
   const noteLines = useMemo(() => {
     const positions = data.flatMap((measurement) => {
       return (measurement.notes || []).map((note) => {
-        return measurement.date;
+        return measurement.date + halfDay;
       });
     });
     return Array.from(new Set(positions));
@@ -145,7 +145,7 @@ export const MeasurementsChart = ({
             tickFormatter={xAxisTickFormatter}
             tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
             axisLine={{ stroke: "var(--color-gray-400)" }}
-            scale="linear"
+            scale="time"
           />
           <YAxis
             yAxisId="left"
