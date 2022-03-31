@@ -25,11 +25,13 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
   return (
     <div
       className={classes(
-        `rounded-md text-xs group-card flex-row flex space-x-2 relative min-w-0`, // min-w-0 -> https://stackoverflow.com/questions/39838908/text-overflow-ellipsis-not-working-in-nested-flexbox
+        `rounded-md group-card flex-row flex space-x-2 relative min-w-0`, // min-w-0 -> https://stackoverflow.com/questions/39838908/text-overflow-ellipsis-not-working-in-nested-flexbox
         isComment
           ? "bg-white text-gray-600"
           : "text-gray-600 border-l-2 border-l-red-500 bg-white",
-        isSmall ? "py-2 shadow-lg border border-gray-200" : "py-3",
+        isSmall
+          ? "py-2 shadow-lg border border-gray-200 text-xs"
+          : "py-3 text-sm",
         isSmall && isAlert && "pl-2"
       )}
     >
@@ -42,12 +44,13 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
         </div>
       )}
 
-      <div>
-        {isComment ? (
-          !isSmall && <div className="w-5" />
-        ) : (
-          <ExclamationIcon className="w-4 text-red-500" />
+      <div
+        className={classes(
+          isComment && !isSmall && "pl-5",
+          isAlert && !isSmall && "pt-1"
         )}
+      >
+        {isAlert && <ExclamationIcon className="w-4 text-red-500" />}
       </div>
       <div className={classes(`flex-grow`, isSmall && "truncate")}>
         {note.note}
