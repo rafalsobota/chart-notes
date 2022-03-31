@@ -38,7 +38,7 @@ export const MeasurementsFeed: React.FC<MeasurementsFeedProps> = ({
   }
 
   return (
-    <div className="py-5 pb-10 md:px-14 bg-gray-50">
+    <div className="pt-5 pb-40 bg-gray-50">
       <div className="max-w-2xl mx-auto space-y-10">
         {visibleMeasurements.map((measurement) => (
           <div
