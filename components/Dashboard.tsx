@@ -5,7 +5,7 @@ import { EmptyChart } from "./EmptyChart";
 import { MeasurementsChart } from "./MeasurementsChart";
 import Link from "next/link";
 import { ArrowSmLeftIcon, ArrowSmRightIcon } from "@heroicons/react/outline";
-import { MeasurementsFeed } from "./MeasurementFeed";
+import { MeasurementsFeed } from "./MeasurementsFeed";
 import { useRouter } from "next/router";
 
 export type DashboardProps = {

@@ -14,7 +14,7 @@ import { CategoricalChartState } from "recharts/types/chart/generateCategoricalC
 import { Measurement, Timestamp } from "../lib/api/types";
 import { formatDate } from "../lib/time";
 import { Legend } from "./Legend";
-import { MeasurementTooltip } from "./MeasurementTooltip";
+import { MeasurementChartTooltip } from "./MeasurementChartTooltip";
 
 const tickFormatter = (date: Timestamp) => {
   if (typeof date !== "number") {
@@ -62,7 +62,7 @@ export const MeasurementsChart = ({
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" tickFormatter={tickFormatter} opacity="0.5" />
           <YAxis yAxisId="left" opacity="0.5" />
-          <Tooltip content={MeasurementTooltip as any} />
+          <Tooltip content={MeasurementChartTooltip as any} />
           <Line
             dot={false}
             yAxisId="left"
