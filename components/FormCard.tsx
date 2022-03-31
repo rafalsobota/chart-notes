@@ -1,8 +1,4 @@
-export const classes = (
-  ...classNames: (string | undefined | null | boolean)[]
-) => {
-  return classNames.filter(Boolean).join(" ");
-};
+import { classes } from "../lib/classes";
 
 export type ClassNameProps = {
   className?: string;

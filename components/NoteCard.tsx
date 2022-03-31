@@ -3,7 +3,7 @@ import { ExclamationIcon } from "@heroicons/react/solid";
 import { useCallback } from "react";
 import { useDeleteNoteMutation } from "../lib/api";
 import { Note } from "../lib/api/types";
-import { classes } from "./FormCard";
+import { classes } from "../lib/classes";
 import { MetricIcon } from "./MetricIcon";
 
 export type NoteCardProps = {
@@ -37,7 +37,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
     >
       {!isSmall && (
         <div
-          className="absolute top-0 right-0 invisible p-1 -mt-2 -mr-2 text-gray-600 bg-white border border-gray-200 rounded-full cursor-pointer group-card-hover:visible active:bg-gray-100"
+          className="absolute top-0 right-0 invisible px-1 -mt-2 -mr-2 text-gray-600 bg-white border border-gray-200 rounded-full cursor-pointer group-card-hover:visible active:bg-gray-100"
           onClick={onDelete}
         >
           <XIcon className="inline-block w-3 h-3 text-red-500" />
