@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
   CartesianGrid,
   Line,
@@ -46,6 +46,31 @@ export const MeasurementsChart = ({
     [onDateSelected]
   );
 
+  const redDots = useMemo(() => {
+    return data.flatMap((measurement) => {
+      return (measurement.notes || [])
+        .filter((note) => note.type === "alert")
+        .flatMap((note) => {
+          return note.metrics.map((metric) => {
+            return {
+              x: measurement.date,
+              y: measurement[metric],
+              id: note.id,
+            };
+          });
+        });
+    });
+  }, [data]);
+
+  const grayLines = useMemo(() => {
+    const positions = data.flatMap((measurement) => {
+      return (measurement.notes || []).map((note) => {
+        return measurement.date;
+      });
+    });
+    return Array.from(new Set(positions));
+  }, [data]);
+
   return (
     <div>
       <ResponsiveContainer width="100%" height={300}>
@@ -80,7 +105,6 @@ export const MeasurementsChart = ({
             // activeDot={{ r: 8 }}
             name="Outlet °C"
           />
-
           {selectedDate ? (
             <ReferenceLine
               xAxisId={0}
@@ -91,46 +115,34 @@ export const MeasurementsChart = ({
               opacity={1}
             />
           ) : null}
-          {data
-            .flatMap((measurement) =>
-              (measurement.notes || []).map((note) => ({ note, measurement }))
-            )
-            .map(({ note, measurement }) => {
-              if (note.metrics.length === 2) {
-                return (
-                  <ReferenceLine
-                    key={note.id}
-                    xAxisId={0}
-                    yAxisId="left"
-                    x={note.date}
-                    stroke={note.type === "alert" ? "red" : "gray"}
-                    opacity={0.5}
-                    strokeWidth={1}
-                  />
-                );
-              } else if (note.metrics.length === 1) {
-                return (
-                  <ReferenceDot
-                    key={note.id}
-                    x={note.date}
-                    y={
-                      note.metrics[0] === "reactorHotspotTemperatureC"
-                        ? measurement.reactorHotspotTemperatureC
-                        : measurement.reactorOutletTemperatureC
-                    }
-                    xAxisId={0}
-                    yAxisId="left"
-                    fill={note.type === "alert" ? "red" : "gray"}
-                    // stroke="white"
-                    stroke={note.type === "alert" ? "red" : "white"}
-                    opacity={note.type === "alert" ? 1 : 0.5}
-                    r={3}
-                  />
-                );
-              } else {
-                return <></>;
-              }
-            })}
+          {grayLines.map((date) => {
+            return (
+              <ReferenceLine
+                key={date}
+                xAxisId={0}
+                yAxisId="left"
+                x={date}
+                stroke={"gray"}
+                opacity={0.5}
+                strokeWidth={1}
+              />
+            );
+          })}
+          {redDots.map((dot) => {
+            return (
+              <ReferenceDot
+                key={dot.id + "-" + dot.y}
+                x={dot.x}
+                y={dot.y}
+                xAxisId={0}
+                yAxisId="left"
+                fill={"red"}
+                stroke={"red"}
+                r={3}
+                cursor="pointer"
+              />
+            );
+          })}
         </LineChart>
       </ResponsiveContainer>
       <Legend data={data} />
