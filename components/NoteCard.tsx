@@ -52,7 +52,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
       <div className={classes(`flex-grow`, isSmall && "truncate")}>
         {note.note}
       </div>
-      <div className="pr-1">
+      <div className={isSmall ? "pr-1" : "pr-2"}>
         {note.metrics.includes("reactorHotspotTemperatureC") ? (
           <MetricIcon metric={"reactorHotspotTemperatureC"} />
         ) : null}
