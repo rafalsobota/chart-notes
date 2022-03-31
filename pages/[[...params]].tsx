@@ -1,14 +1,15 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import { parseDate } from "../lib/time";
 import { Dashboard } from "../components/Dashboard";
 import { parseYear } from "../lib/time";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const year = parseYear(router.query.year);
-  return <Dashboard year={year} />;
+  const [yearParam, dateParam] = (router.query.params || []) as string[];
+  const year = parseYear(yearParam);
+  const date = parseDate(dateParam);
+  return <Dashboard year={year} date={date} />;
 };
 
 export default Home;

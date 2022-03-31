@@ -25,11 +25,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ year, date }) => {
   const onDateSelected = useCallback(
     (date?: Timestamp) => {
       setDate(date);
-      if (date) {
-        router.push(`/[year]/[date]`, `/${year}/${date}`, { shallow: true });
-      } else {
-        router.push(`/[year]/[date]`, `/${year}/-`, { shallow: true });
-      }
+      const url = date ? `/${year}/${date}` : `/${year}`;
+      router.push(url, url, {
+        shallow: true,
+        scroll: false,
+      });
     },
     [year]
   );
