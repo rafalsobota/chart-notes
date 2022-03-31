@@ -12,6 +12,12 @@ export const metricTextColor = (metric: MetricName): string => {
     : "text-sensor-2";
 };
 
+export const metricVarColor = (metric: MetricName): string => {
+  return metric === "reactorHotspotTemperatureC"
+    ? "var(--color-sensor-1)"
+    : "var(--color-sensor-2)";
+};
+
 export const metricLabel = (metric: MetricName): string => {
   return metric == "reactorHotspotTemperatureC"
     ? "°C on Hotspot" : "°C on Reactor";

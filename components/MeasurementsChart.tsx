@@ -13,6 +13,7 @@ import {
   YAxis,
 } from "recharts";
 import { CategoricalChartState } from "recharts/types/chart/generateCategoricalChart";
+import { metricVarColor } from "../lib/api/models/metrics";
 import {
   Measurement,
   MetricName,
@@ -23,18 +24,7 @@ import { formatDate } from "../lib/time";
 import { Legend } from "./Legend";
 import { MeasurementChartTooltip } from "./MeasurementChartTooltip";
 
-const xAxisTickFormatter = (date: Timestamp) => {
-  return formatDate(date);
-};
-
-type AggregateLineProps = {
-  label: string;
-  y: number;
-  color: string;
-  variant?: "solid" | "dashed";
-};
-
-const halfDay = 1000 * 60 * 60 * 12;
+const halfADay = 1000 * 60 * 60 * 12;
 
 const AggregateLine: React.FC<AggregateLineProps> = ({
   label,
@@ -108,7 +98,7 @@ export const MeasurementsChart = ({
         .flatMap((note) => {
           return note.metrics.map((metric) => {
             return {
-              x: measurement.date + halfDay,
+              x: measurement.date + halfADay,
               y: measurement[metric],
               id: note.id,
             };
@@ -120,7 +110,7 @@ export const MeasurementsChart = ({
   const noteLines = useMemo(() => {
     const positions = data.flatMap((measurement) => {
       return (measurement.notes || []).map((note) => {
-        return measurement.date + halfDay;
+        return measurement.date + halfADay;
       });
     });
     return Array.from(new Set(positions));
@@ -157,35 +147,35 @@ export const MeasurementsChart = ({
           {AggregateLine({
             label: "avg",
             y: series.avg(metricNames[0]),
-            color: "var(--color-sensor-1)",
+            color: metricVarColor(metricNames[0]),
           })}
           {AggregateLine({
             label: "min",
             y: series.min(metricNames[0]),
-            color: "var(--color-sensor-1)",
+            color: metricVarColor(metricNames[0]),
             variant: "dashed",
           })}
           {AggregateLine({
             label: "max",
             y: series.max(metricNames[0]),
-            color: "var(--color-sensor-1)",
+            color: metricVarColor(metricNames[0]),
             variant: "dashed",
           })}
           {AggregateLine({
             label: "avg",
             y: series.avg(metricNames[1]),
-            color: "var(--color-sensor-2)",
+            color: metricVarColor(metricNames[1]),
           })}
           {AggregateLine({
             label: "min",
             y: series.min(metricNames[1]),
-            color: "var(--color-sensor-2)",
+            color: metricVarColor(metricNames[1]),
             variant: "dashed",
           })}
           {AggregateLine({
             label: "max",
             y: series.max(metricNames[1]),
-            color: "var(--color-sensor-2)",
+            color: metricVarColor(metricNames[1]),
             variant: "dashed",
           })}
           <Line
@@ -208,7 +198,7 @@ export const MeasurementsChart = ({
             <ReferenceLine
               xAxisId={0}
               yAxisId="left"
-              x={selectedDate + halfDay}
+              x={selectedDate + halfADay}
               stroke="var(--color-primary-500)"
               strokeWidth={2}
               opacity={1}
@@ -248,4 +238,20 @@ export const MeasurementsChart = ({
       <Legend data={data} series={series} />
     </div>
   );
+};
+
+const xAxisTickFormatter = (date: Timestamp) => {
+  return formatDate(date);
+};
+
+type AggregateLinesProps = {
+  series: TimeSeries<Time>;
+  metric: MetricName;
+};
+
+type AggregateLineProps = {
+  label: string;
+  y: number;
+  color: string;
+  variant?: "solid" | "dashed";
 };
