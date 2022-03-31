@@ -2,7 +2,7 @@ import { Measurement, MetricName, metricNames } from "../lib/api/types";
 import { Time, TimeSeries, timeSeries } from "pondjs";
 import { useMemo } from "react";
 import { MetricIcon } from "./MetricIcon";
-import { metricLabel, metricTextColor } from "../lib/metrics";
+import { metricLabel, metricTextColor } from "../lib/api/models/metrics";
 
 export type LegendProps = {
   data: Measurement[];
@@ -40,13 +40,13 @@ export const Legend: React.FC<LegendProps> = ({ data }) => {
   );
 };
 
-type MetricLabelProps = {
+type MetricLegendProps = {
   label: string;
   metric: MetricName;
   series: TimeSeries<Time>;
 };
 
-const MetricLegend: React.FC<MetricLabelProps> = ({
+const MetricLegend: React.FC<MetricLegendProps> = ({
   label,
   metric,
   series,
@@ -67,13 +67,11 @@ const MetricLegend: React.FC<MetricLabelProps> = ({
 type CommonAggregatesProps = {
   series: TimeSeries<Time>;
   metric: MetricName;
-  fractionDigits?: number;
 };
 
 const CommonAggregates: React.FC<CommonAggregatesProps> = ({
   series,
   metric,
-  fractionDigits,
 }) => {
   return (
     <div className="text-left text-gray-400">

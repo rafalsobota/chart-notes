@@ -1,9 +1,9 @@
 import { Measurement, MetricName, Timestamp } from "../lib/api/types";
 import { formatDate } from "../lib/time";
 import { useCallback } from "react";
-import { NoteCreator } from "./NoteCreator";
+import { AddNoteButton } from "./AddNoteButton";
 import { NoteCard } from "./NoteCard";
-import { metricLabel, metricTextColor } from "../lib/metrics";
+import { metricLabel, metricTextColor } from "../lib/api/models/metrics";
 
 type MeasurementDetailsProps = {
   measurement: Measurement;
@@ -42,7 +42,7 @@ export const MeasurementDetails = ({
           <NoteCard note={n} key={n.id} />
         ))}
         <div className="flex-row text-center">
-          <NoteCreator date={measurement.date} />
+          <AddNoteButton date={measurement.date} />
         </div>
       </div>
     </div>

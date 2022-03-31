@@ -3,11 +3,11 @@ import { Timestamp } from "../lib/api";
 import { Button } from "./Button";
 import { NewNoteForm } from "./NewNoteForm";
 
-export type NoteCreatorProps = {
+export type AddNoteButtonProps = {
   date: Timestamp;
 };
 
-export const NoteCreator = ({ date }: NoteCreatorProps) => {
+export const AddNoteButton = ({ date }: AddNoteButtonProps) => {
   const [inCreationMode, setCreationMode] = useState(false);
 
   const openEditMode = () => {

@@ -1,7 +1,6 @@
 import { Measurement, Note } from "../lib/api/types";
 import { formatDate } from "../lib/time";
-import { ExclamationIcon, AnnotationIcon } from "@heroicons/react/solid";
-import { metricLabel } from "../lib/metrics";
+import { metricLabel } from "../lib/api/models/metrics";
 import { NoteCard } from "./NoteCard";
 
 type NotesSummary = {
@@ -67,24 +66,4 @@ export const MeasurementChartTooltip: React.FC<
   } else {
     return null;
   }
-};
-
-type NoteTooltipProps = {
-  note: Note;
-};
-const NoteTooltip: React.FC<NoteTooltipProps> = ({ note }) => {
-  const className =
-    note.type === "alert" ? "bg-red-500 text-white" : "bg-gray-500 text-white";
-  return (
-    <div
-      className={`max-w-xs md:max-w-sm p-2 text-xs truncate rounded-md ${className}`}
-    >
-      {note.type === "alert" ? (
-        <ExclamationIcon className="inline-block h-3 pr-1" />
-      ) : (
-        <AnnotationIcon className="inline-block h-3 pr-1" />
-      )}
-      {note.note}
-    </div>
-  );
 };

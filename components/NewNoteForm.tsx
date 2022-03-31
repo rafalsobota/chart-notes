@@ -1,11 +1,7 @@
 import { useForm } from "react-hook-form";
-import {
-  MetricName,
-  metricNames,
-  NoteType,
-  noteTypes,
-  useAddNoteMutation,
-} from "../lib/api";
+import { metricNames, noteTypes, useAddNoteMutation } from "../lib/api";
+import { fiendlyMetricName } from "../lib/api/models/metrics";
+import { fiendlyNoteTypeName } from "../lib/api/models/notes";
 import { Button } from "./Button";
 import {
   FormActions,
@@ -33,20 +29,14 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
   const disabled = isSubmitSuccessful && isSubmitted;
 
   const onSubmit = (data: any) => {
-    addNoteMutation.mutate(
-      {
-        date,
-        metrics: data.metrics,
-        note: data.note,
-        type: data.type,
-      },
-      {
-        onSuccess: () => {
-          onClose();
-          reset();
-        },
-      }
-    );
+    addNoteMutation.mutate({
+      date,
+      metrics: data.metrics,
+      note: data.note,
+      type: data.type,
+    });
+    onClose();
+    reset();
   };
 
   return (
@@ -119,7 +109,7 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
                       className="inline-block text-gray-800 cursor-pointer form-check-label"
                       htmlFor={id}
                     >
-                      {fiendlyNoteMetricName(metric)}
+                      {fiendlyMetricName(metric)}
                     </label>
                   </div>
                 );
@@ -139,22 +129,4 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
       </form>
     </FormCard>
   );
-};
-
-const fiendlyNoteMetricName = (metric: MetricName): string => {
-  switch (metric) {
-    case "reactorOutletTemperatureC":
-      return "Reactor Outlet Temperature";
-    case "reactorHotspotTemperatureC":
-      return "Reactor Hotspot Temperature";
-  }
-};
-
-const fiendlyNoteTypeName = (type: NoteType): string => {
-  switch (type) {
-    case "alert":
-      return "Alert";
-    case "comment":
-      return "Comment";
-  }
 };

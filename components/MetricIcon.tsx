@@ -1,5 +1,5 @@
 import { MetricName } from "../lib/api";
-import { metricBgColor } from "../lib/metrics";
+import { metricBgColor } from "../lib/api/models/metrics";
 
 type SensorIconProps = {
   metric: MetricName;

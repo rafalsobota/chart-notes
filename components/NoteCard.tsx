@@ -19,7 +19,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
   const isAlert = !isComment;
 
   const onDelete = useCallback(() => {
-    deleteNoteMutation.mutate(note.id);
+    deleteNoteMutation.mutate({ id: note.id, date: note.date });
   }, [note.id]);
 
   return (

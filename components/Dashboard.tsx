@@ -36,42 +36,44 @@ export const Dashboard: React.FC<DashboardProps> = ({ year, date }) => {
 
   return (
     <div className="space-y-3">
-      <h1 className="pt-10 text-4xl text-center text-gray-900">
-        Reactor Temperature
-      </h1>
-      <h2 className="text-center text-gray-400 text-md">
-        <Link href={`/${year - 1}`}>
-          <button className="p-2">
-            <ArrowSmLeftIcon className="h-5 -mb-1 active:-ml-1 active:mr-1" />
-          </button>
-        </Link>
-        Year {year}
-        <Link href={`/${year + 1}`}>
-          <button className="p-2">
-            <ArrowSmRightIcon className="h-5 -mb-1 active:-mr-1 active:ml-1" />
-          </button>
-        </Link>
-      </h2>
+      <div className="bg-white">
+        <h1 className="pt-10 text-4xl text-center text-gray-900">
+          Reactor Temperature
+        </h1>
+        <h2 className="text-center text-gray-400 text-md">
+          <Link href={`/${year - 1}`}>
+            <button className="p-2">
+              <ArrowSmLeftIcon className="h-5 -mb-1 active:-ml-1 active:mr-1" />
+            </button>
+          </Link>
+          Year {year}
+          <Link href={`/${year + 1}`}>
+            <button className="p-2">
+              <ArrowSmRightIcon className="h-5 -mb-1 active:-mr-1 active:ml-1" />
+            </button>
+          </Link>
+        </h2>
 
-      {status === "loading" || status === "idle" ? (
-        <EmptyChart message={"Loading..."} />
-      ) : status === "error" ? (
-        <EmptyChart message={"Error"} />
-      ) : data.length < 1 ? (
-        <EmptyChart message={"No data available"} />
-      ) : (
-        <>
+        {status === "loading" || status === "idle" ? (
+          <EmptyChart message={"Loading..."} />
+        ) : status === "error" ? (
+          <EmptyChart message={"Error"} />
+        ) : data.length < 1 ? (
+          <EmptyChart message={"No data available"} />
+        ) : (
           <MeasurementsChart
             data={data}
             onDateSelected={onDateSelected}
             selectedDate={selectedDate}
           />
-          <MeasurementsFeed
-            measurements={data}
-            selectedDate={selectedDate}
-            onDateSelected={onDateSelected}
-          />
-        </>
+        )}
+      </div>
+      {status === "success" && (
+        <MeasurementsFeed
+          measurements={data}
+          selectedDate={selectedDate}
+          onDateSelected={onDateSelected}
+        />
       )}
     </div>
   );
