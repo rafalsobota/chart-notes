@@ -75,7 +75,7 @@ export const FormCard: React.FC<ClassNameProps> = ({ children, className }) => {
   return (
     <div
       className={classes(
-        "text-sm text-gray-500 bg-white border border-gray-200 rounded-md",
+        "text-sm text-gray-600 bg-white border border-gray-200 rounded-md",
         className
       )}
     >

@@ -43,14 +43,14 @@ export const NewNoteForm: React.FC<NewNoteFormProps> = ({ onClose, date }) => {
     <FormCard className="shadow-xl">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="text-left text-gray-500"
+        className="text-left text-gray-600"
       >
         <FormHeader>
           <div className="font-semibold">New Note</div>
         </FormHeader>
         <FormContent>
           <FormSection>
-            <div className="text-gray-500">Note</div>
+            <div className="text-gray-600">Note</div>
             <textarea
               {...register("note", { required: true })}
               className="w-full p-3 text-sm border border-gray-300 rounded-md focus:outline-primary-500"

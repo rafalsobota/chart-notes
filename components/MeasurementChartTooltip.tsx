@@ -32,7 +32,7 @@ export const MeasurementChartTooltip: React.FC<
     const notesSummary = makeNotesSummary(measurement.notes);
     return (
       <div className="flex flex-col items-start space-y-1">
-        <div className="font-semibold text-gray-500 bg-white">
+        <div className="font-semibold text-gray-600 bg-white">
           {formatDate(measurement.date, true)}
         </div>
         <div className="flex flex-row items-baseline align-bottom bg-white text-sensor-1">
@@ -55,8 +55,13 @@ export const MeasurementChartTooltip: React.FC<
           <div className="flex flex-row items-center max-w-xs md:max-w-sm">
             <NoteCard note={notesSummary.recentNote} variant="small" />
             {notesSummary.notesCount > 1 && (
-              <div className="flex-grow-0 px-1 text-xs bg-white min-w-fit">
-                + {notesSummary.notesCount - 1}
+              <div className="flex-grow-0 px-1 text-xs text-gray-600 bg-white min-w-fit">
+                <div className="block md:hidden">
+                  + {notesSummary.notesCount - 1}
+                </div>
+                <div className="hidden md:block">
+                  and {notesSummary.notesCount - 1} more
+                </div>
               </div>
             )}
           </div>

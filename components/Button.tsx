@@ -23,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
       ${
         variant === "primary"
           ? "bg-primary-500 text-white hover:bg-primary-600 hover:text-white focus:text-white"
-          : "text-gray-500"
+          : "text-gray-600"
       }
       ${
         disabled
