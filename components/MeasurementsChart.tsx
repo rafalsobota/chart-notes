@@ -34,6 +34,8 @@ type AggregateLineProps = {
   variant?: "solid" | "dashed";
 };
 
+const halfDay = 1000 * 60 * 60 * 12;
+
 const AggregateLine: React.FC<AggregateLineProps> = ({
   label,
   y,
@@ -106,7 +108,7 @@ export const MeasurementsChart = ({
         .flatMap((note) => {
           return note.metrics.map((metric) => {
             return {
-              x: measurement.date,
+              x: measurement.date + halfDay,
               y: measurement[metric],
               id: note.id,
             };
@@ -143,7 +145,7 @@ export const MeasurementsChart = ({
             tickFormatter={xAxisTickFormatter}
             tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
             axisLine={{ stroke: "var(--color-gray-400)" }}
-            scale="time"
+            scale="linear"
           />
           <YAxis
             yAxisId="left"
@@ -200,14 +202,13 @@ export const MeasurementsChart = ({
             type="monotone"
             dataKey="reactorOutletTemperatureC"
             stroke="var(--color-sensor-2)"
-            // activeDot={{ r: 8 }}
             name="Outlet °C"
           />
           {selectedDate ? (
             <ReferenceLine
               xAxisId={0}
               yAxisId="left"
-              x={selectedDate}
+              x={selectedDate + halfDay}
               stroke="var(--color-primary-500)"
               strokeWidth={2}
               opacity={1}
