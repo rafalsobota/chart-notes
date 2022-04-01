@@ -22,6 +22,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
           rel="stylesheet"
         />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"
+        ></meta>
       </Head>
       <ApiProvider>
         <Component {...pageProps} />
