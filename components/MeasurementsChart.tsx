@@ -232,7 +232,7 @@ const MetricLine = ({ series, metric }: AggregateLinesProps) => {
     <YAxis
       yAxisId={metric}
       id={metric}
-      tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
+      tick={{ fontSize: 14, fill: metricVarColor(metric) }}
       axisLine={{ stroke: metricVarColor(metric) }}
       domain={[series.min(metric) - 10, series.max(metric) + 10]}
       width={40}
