@@ -12,11 +12,13 @@ export const Legend: React.FC<LegendProps> = ({ data, series }) => {
     <div>
       <div className="flex flex-row items-baseline p-5 mx-auto space-x-5 w-fit">
         {metricNames.map((metric) => {
-          <MetricLegend
-            series={series}
-            metric={metric}
-            label={metricLabel(metric)}
-          />;
+          return (
+            <MetricLegend
+              series={series}
+              metric={metric}
+              label={metricLabel(metric)}
+            />
+          );
         })}
       </div>
     </div>

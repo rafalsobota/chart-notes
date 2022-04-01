@@ -51,15 +51,6 @@ export const MeasurementsChart = ({
     return series;
   }, [data]);
 
-  const yMin = useMemo(
-    () => Math.min(series.min(metricNames[0]), series.min(metricNames[1])) - 5,
-    [series]
-  );
-  const yMax = useMemo(
-    () => Math.max(series.max(metricNames[0]), series.max(metricNames[1])) + 5,
-    [series]
-  );
-
   const onClick = useCallback(
     (e: CategoricalChartState) => {
       if (e && e.activePayload && e.activePayload.length > 0) {
@@ -99,13 +90,11 @@ export const MeasurementsChart = ({
 
   return (
     <div>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={400}>
         <LineChart
-          width={500}
-          height={300}
           data={data}
           margin={{
-            right: 50,
+            right: 30,
             left: 0,
           }}
           onClick={onClick}
@@ -118,18 +107,12 @@ export const MeasurementsChart = ({
             axisLine={{ stroke: "var(--color-gray-400)" }}
             scale="time"
           />
-          <YAxis
-            yAxisId="left"
-            tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
-            axisLine={{ stroke: "var(--color-gray-400)" }}
-            domain={[yMin, yMax]}
-          />
           <Tooltip content={MeasurementChartTooltip as any} />
           {metricNames.map((metric) => MetricLine({ metric, series }))}
           {selectedDate ? (
             <ReferenceLine
               xAxisId={0}
-              yAxisId="left"
+              yAxisId={metricNames[0]}
               x={selectedDate + halfADay}
               stroke="var(--color-primary-500)"
               strokeWidth={2}
@@ -141,7 +124,7 @@ export const MeasurementsChart = ({
               <ReferenceLine
                 key={date}
                 xAxisId={0}
-                yAxisId="left"
+                yAxisId={metricNames[0]}
                 x={date}
                 stroke={"gray"}
                 opacity={0.5}
@@ -157,7 +140,7 @@ export const MeasurementsChart = ({
                 x={dot.x}
                 y={dot.y}
                 xAxisId={0}
-                yAxisId="left"
+                yAxisId={metricNames[0]}
                 fill={"red"}
                 stroke={"red"}
                 r={3}
@@ -182,6 +165,7 @@ type AggregateLineProps = {
   color: string;
   variant?: "solid" | "dashed";
   key?: string;
+  yAxisId: string;
 };
 
 const AggregateLine: React.FC<AggregateLineProps> = ({
@@ -190,12 +174,13 @@ const AggregateLine: React.FC<AggregateLineProps> = ({
   color,
   variant,
   key,
+  yAxisId,
 }) => {
   return (
     <ReferenceLine
       key={key}
       xAxisId={0}
-      yAxisId="left"
+      yAxisId={yAxisId}
       y={y}
       stroke={color}
       strokeWidth={1}
@@ -222,12 +207,14 @@ const AggregateLines = ({ series, metric }: AggregateLinesProps) => {
       y: series.max(metric),
       color: metricVarColor(metric),
       variant: "dashed",
+      yAxisId: metric,
     }),
     AggregateLine({
       key: `${metric}-avg-label`,
       label: "avg",
       y: series.avg(metric),
       color: metricVarColor(metric),
+      yAxisId: metric,
     }),
     AggregateLine({
       key: `${metric}-min-label`,
@@ -235,16 +222,25 @@ const AggregateLines = ({ series, metric }: AggregateLinesProps) => {
       y: series.min(metric),
       color: metricVarColor(metric),
       variant: "dashed",
+      yAxisId: metric,
     }),
   ];
 };
 
 const MetricLine = ({ series, metric }: AggregateLinesProps) => {
   return [
+    <YAxis
+      yAxisId={metric}
+      id={metric}
+      tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
+      axisLine={{ stroke: metricVarColor(metric) }}
+      domain={[series.min(metric) - 10, series.max(metric) + 10]}
+      width={40}
+    />,
     AggregateLines({ series, metric }),
     <Line
       dot={false}
-      yAxisId="left"
+      yAxisId={metric}
       type="monotone"
       dataKey={metric}
       stroke={metricVarColor(metric)}

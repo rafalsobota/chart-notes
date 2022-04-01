@@ -13,11 +13,9 @@ export type NoteCardProps = {
 
 export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
   const deleteNoteMutation = useDeleteNoteMutation();
-
   const isSmall = variant === "small";
   const isComment = note.type === "comment";
   const isAlert = !isComment;
-
   const onDelete = useCallback(() => {
     deleteNoteMutation.mutate({ id: note.id, date: note.date });
   }, [note.id]);
@@ -25,7 +23,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
   return (
     <div
       className={classes(
-        `rounded-md group-card flex-row flex space-x-2 relative min-w-0`, // min-w-0 -> https://stackoverflow.com/questions/39838908/text-overflow-ellipsis-not-working-in-nested-flexbox
+        `rounded-md group-card flex-row flex space-x-2 relative min-w-0`,
         isComment
           ? "bg-white text-gray-600"
           : "text-gray-600 border-l-2 border-l-red-500 bg-white",
@@ -43,7 +41,6 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, variant }) => {
           <XIcon className="inline-block w-3 h-3 text-red-500" />
         </div>
       )}
-
       <div
         className={classes(
           isComment && !isSmall && "pl-5",
