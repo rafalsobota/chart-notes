@@ -59,6 +59,7 @@ export const MeasurementChartTooltip: React.FC<
             )}
           </div>
         )}
+        <div className="text-xs text-gray-400 bg-white">Click for details</div>
       </div>
     );
   } else {
