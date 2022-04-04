@@ -28,14 +28,12 @@ export type MeasurementsChartProps = {
   data: Measurement[];
   onDateSelected: (date: Timestamp) => void;
   selectedDate?: Timestamp;
-  year: number;
 };
 
 export const MeasurementsChart = ({
   data,
   onDateSelected,
   selectedDate,
-  year,
 }: MeasurementsChartProps) => {
   const series = useMemo(() => {
     const series = timeSeries({

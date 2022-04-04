@@ -65,7 +65,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ year, date }) => {
             data={data}
             onDateSelected={onDateSelected}
             selectedDate={selectedDate}
-            year={year}
           />
         )}
       </div>
