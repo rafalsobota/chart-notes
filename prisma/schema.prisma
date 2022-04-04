@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Measurement {
+  date                       DateTime @unique
+  componentAFlowKgH          Float
+  componentBFlowKgH          Float
+  coolantTemperatureC        Float
+  reactorOutletTemperatureC  Float
+  reactorHotspotTemperatureC Float
+  yieldPercent               Float
+  productFlowTonsPerDay      Float
+  notes                      Note[]
+}
+
+model Note {
+  id          Int         @id @default(autoincrement())
+  date        DateTime
+  metrics     String // comma separeted list of metric field names
+  note        String
+  type        String
+  plantMetric Measurement @relation(fields: [date], references: [date], onDelete: NoAction)
+}
