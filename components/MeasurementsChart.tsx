@@ -24,18 +24,18 @@ import { formatDate } from "../lib/time";
 import { Legend } from "./Legend";
 import { MeasurementChartTooltip } from "./MeasurementChartTooltip";
 
-const halfADay = 1000 * 60 * 60 * 12;
-
 export type MeasurementsChartProps = {
   data: Measurement[];
   onDateSelected: (date: Timestamp) => void;
   selectedDate?: Timestamp;
+  year: number;
 };
 
 export const MeasurementsChart = ({
   data,
   onDateSelected,
   selectedDate,
+  year,
 }: MeasurementsChartProps) => {
   const series = useMemo(() => {
     const series = timeSeries({
@@ -70,7 +70,7 @@ export const MeasurementsChart = ({
         .flatMap((note) => {
           return note.metrics.map((metric) => {
             return {
-              x: measurement.date + halfADay,
+              x: measurement.date,
               y: measurement[metric],
               id: note.id,
             };
@@ -82,7 +82,7 @@ export const MeasurementsChart = ({
   const noteLines = useMemo(() => {
     const positions = data.flatMap((measurement) => {
       return (measurement.notes || []).map((note) => {
-        return measurement.date + halfADay;
+        return measurement.date;
       });
     });
     return Array.from(new Set(positions));
@@ -106,6 +106,8 @@ export const MeasurementsChart = ({
             tick={{ fontSize: 14, fill: "var(--color-gray-400)" }}
             axisLine={{ stroke: "var(--color-gray-400)" }}
             scale="time"
+            type="number"
+            domain={["dataMin", "dataMax"]}
           />
           <Tooltip content={MeasurementChartTooltip as any} />
           {metricNames.map((metric) => MetricLine({ metric, series }))}
@@ -113,7 +115,7 @@ export const MeasurementsChart = ({
             <ReferenceLine
               xAxisId={0}
               yAxisId={metricNames[0]}
-              x={selectedDate + halfADay}
+              x={selectedDate}
               stroke="var(--color-primary-500)"
               strokeWidth={2}
               opacity={1}
